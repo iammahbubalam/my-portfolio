@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -71,4 +71,4 @@ app.use('*', (req, res) => {
 // Error handler middleware
 app.use(errorHandler);
 
-module.exports = app;
+export default app;
