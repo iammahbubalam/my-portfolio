@@ -2,16 +2,58 @@
 
 A robust backend API for my portfolio website to showcase my skills, projects, research, professional experience, and blog content.
 
+## 📋 Table of Contents
+- [Tech Stack](#tech-stack)
+- [Project Setup Guide](#project-setup-guide)
+- [API Documentation](#api-documentation)
+- [Authentication System](#single-user-authentication-system)
+- [Database Schema Design](#enhanced-database-schema-design-with-typescript)
+- [Development Guidelines](#development-guidelines)
+- [Testing Strategy](#testing-strategy)
+- [Deployment Guide](#deployment-guide)
+- [Security Best Practices](#security-best-practices)
+- [Performance Optimization](#performance-optimization)
+- [Monitoring and Analytics](#analytics-and-metrics)
+- [CI/CD Pipeline](#devops-and-cicd)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Tech Stack
 
-- **MongoDB**: NoSQL database for storing portfolio data
-- **Express.js**: Web application framework for building the API
-- **Node.js**: JavaScript runtime environment
-- **TypeScript**: Strongly typed programming language for enhanced development
-- **JWT**: Authentication mechanism
-- **Mongoose**: MongoDB object modeling tool
+### Core Technologies
+- **MongoDB v5.0+**: NoSQL document database for flexible data modeling
+- **Express.js v4.18+**: Fast, unopinionated web framework for Node.js
+- **Node.js v16+**: JavaScript runtime built on Chrome's V8 engine
+- **TypeScript v4.7+**: Strongly typed programming language that builds on JavaScript
+
+### Authentication & Security
+- **JWT**: JSON Web Tokens for secure authentication
+- **bcryptjs**: Library for hashing passwords
+- **helmet**: Helps secure Express apps with various HTTP headers
+- **cors**: Package for providing Connect/Express middleware for CORS support
+- **rate-limiter-flexible**: Protection against brute force attacks
+
+### Data Validation & Processing
+- **mongoose**: MongoDB object modeling for Node.js
+- **validator**: String validation library
+- **multer**: Middleware for handling multipart/form-data (file uploads)
+- **slugify**: Creates URL-friendly slugs from strings
+- **marked**: Markdown parser and compiler for transforming markdown content
+
+### Performance & Optimization
+- **compression**: Compression middleware to improve response speed
+- **redis** (optional): In-memory data structure store for caching
+- **sharp**: Image processing library for resizing uploaded images
 
 ## Project Setup Guide
+
+### Prerequisites
+- Node.js v16.x or higher
+- MongoDB v5.0+ (local installation or MongoDB Atlas account)
+- Git
+- NPM or Yarn
+- Redis (optional, for advanced caching)
 
 ### Step 1: Initialize Project
 ```bash
@@ -48,6 +90,96 @@ Create a `tsconfig.json` file in the root directory:
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts", "dist"]
 }
+```
+
+### Additional Configuration Files
+
+#### ESLint Configuration
+Create `.eslintrc.js` in the root directory:
+
+```javascript
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended'
+  ],
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module'
+  },
+  rules: {
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
+  }
+};
+```
+
+#### Jest Configuration
+Create `jest.config.js` in the root directory:
+
+```javascript
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  roots: ['<rootDir>/src', '<rootDir>/tests'],
+  testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'],
+  transform: {
+    '^.+\\.ts$': 'ts-jest'
+  },
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    '!src/types/**/*.ts',
+    '!**/node_modules/**'
+  ],
+  coverageDirectory: 'coverage',
+  testPathIgnorePatterns: ['/node_modules/', '/dist/']
+};
+```
+
+#### Nodemon Configuration
+Create `nodemon.json` in the root directory:
+
+```json
+{
+  "watch": ["src"],
+  "ext": "ts",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "ts-node ./src/server.ts"
+}
+```
+
+#### Environment Variables Template
+Create `.env.example` in the root directory:
+
+```
+# Server Configuration
+NODE_ENV=development
+PORT=5000
+
+# MongoDB Configuration
+MONGO_URI=mongodb://localhost:27017/portfolio
+
+# JWT Configuration
+JWT_SECRET=your_jwt_secret_here
+JWT_EXPIRE=1d
+JWT_COOKIE_EXPIRE=1
+
+# Admin Credentials
+ADMIN_EMAIL=your-email@example.com
+ADMIN_PASSWORD=your-secure-password
+
+# Email Configuration
+EMAIL_HOST=smtp.example.com
+EMAIL_PORT=587
+EMAIL_USER=your-email@example.com
+EMAIL_PASS=your-email-password
+EMAIL_FROM=your-email@example.com
+
+# File Upload Limits
+MAX_FILE_SIZE=5000000
 ```
 
 ### Step 4: Create Enhanced Project Structure
@@ -119,6 +251,7 @@ portfolio-backend/
 ├── .gitignore
 ├── .eslintrc.js
 ├── jest.config.js
+├── nodemon.json
 ├── tsconfig.json
 └── package.json
 ```

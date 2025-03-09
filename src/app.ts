@@ -56,7 +56,7 @@ app.use('/api/newsletter', newsletterRoutes);
 app.use('/uploads', express.static('uploads'));
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/health', (req: express.Request, res: express.Response): void => {
   res.status(200).json({ status: 'ok' });
 });
 
