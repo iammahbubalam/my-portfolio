@@ -7,6 +7,7 @@ A robust backend API for my portfolio website to showcase my skills, projects, r
 - **MongoDB**: NoSQL database for storing portfolio data
 - **Express.js**: Web application framework for building the API
 - **Node.js**: JavaScript runtime environment
+- **TypeScript**: Strongly typed programming language for enhanced development
 - **JWT**: Authentication mechanism
 - **Mongoose**: MongoDB object modeling tool
 
@@ -21,62 +22,92 @@ npm init -y
 
 ### Step 2: Install Dependencies
 ```bash
+# Install core dependencies
 npm install express mongoose dotenv cors helmet morgan jsonwebtoken bcryptjs validator multer slugify marked compression rate-limiter-flexible
-npm install --save-dev nodemon jest supertest
+
+# Install TypeScript and type definitions
+npm install --save-dev typescript ts-node nodemon @types/node @types/express @types/mongoose @types/cors @types/helmet @types/morgan @types/jsonwebtoken @types/bcryptjs @types/validator @types/multer jest ts-jest @types/jest supertest @types/supertest
 ```
 
-### Step 3: Create Enhanced Project Structure
+### Step 3: Configure TypeScript
+Create a `tsconfig.json` file in the root directory:
+
+```json
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts", "dist"]
+}
+```
+
+### Step 4: Create Enhanced Project Structure
 ```
 portfolio-backend/
-├── config/
-│   ├── db.js
-│   └── config.js
-├── controllers/
-│   ├── authController.js
-│   ├── profileController.js
-│   ├── projectController.js
-│   ├── skillController.js
-│   ├── experienceController.js
-│   ├── educationController.js
-│   ├── researchController.js
-│   ├── blogController.js
-│   └── contactController.js
-├── middleware/
-│   ├── auth.js
-│   ├── errorHandler.js
-│   ├── upload.js
-│   ├── rateLimiter.js
-│   ├── validate.js
-│   └── cache.js
-├── models/
-│   ├── User.js
-│   ├── Profile.js
-│   ├── Project.js
-│   ├── Skill.js
-│   ├── Experience.js
-│   ├── Education.js
-│   ├── Research.js
-│   ├── Blog.js
-│   ├── Comment.js
-│   └── Contact.js
-├── routes/
-│   ├── authRoutes.js
-│   ├── profileRoutes.js
-│   ├── projectRoutes.js
-│   ├── skillRoutes.js
-│   ├── experienceRoutes.js
-│   ├── educationRoutes.js
-│   ├── researchRoutes.js
-│   ├── blogRoutes.js
-│   └── contactRoutes.js
-├── services/
-│   ├── emailService.js
-│   ├── cacheService.js
-│   └── storageService.js
-├── utils/
-│   ├── helpers.js
-│   ├── validators.js
-│   └── logger.js
+├── src/
+│   ├── config/
+│   │   ├── db.ts
+│   │   └── config.ts
+│   ├── controllers/
+│   │   ├── authController.ts
+│   │   ├── profileController.ts
+│   │   ├── projectController.ts
+│   │   ├── skillController.ts
+│   │   ├── experienceController.ts
+│   │   ├── educationController.ts
+│   │   ├── researchController.ts
+│   │   ├── blogController.ts
+│   │   └── contactController.ts
+│   ├── middleware/
+│   │   ├── auth.ts
+│   │   ├── errorHandler.ts
+│   │   ├── upload.ts
+│   │   ├── rateLimiter.ts
+│   │   ├── validate.ts
+│   │   └── cache.ts
+│   ├── models/
+│   │   ├── User.ts
+│   │   ├── Profile.ts
+│   │   ├── Project.ts
+│   │   ├── Skill.ts
+│   │   ├── Experience.ts
+│   │   ├── Education.ts
+│   │   ├── Research.ts
+│   │   ├── Blog.ts
+│   │   ├── Comment.ts
+│   │   └── Contact.ts
+│   ├── routes/
+│   │   ├── authRoutes.ts
+│   │   ├── profileRoutes.ts
+│   │   ├── projectRoutes.ts
+│   │   ├── skillRoutes.ts
+│   │   ├── experienceRoutes.ts
+│   │   ├── educationRoutes.ts
+│   │   ├── researchRoutes.ts
+│   │   ├── blogRoutes.ts
+│   │   └── contactRoutes.ts
+│   ├── services/
+│   │   ├── emailService.ts
+│   │   ├── cacheService.ts
+│   │   └── storageService.ts
+│   ├── utils/
+│   │   ├── helpers.ts
+│   │   ├── validators.ts
+│   │   └── logger.ts
+│   ├── types/
+│   │   ├── express.d.ts
+│   │   └── custom.d.ts
+│   ├── app.ts
+│   └── server.ts
 ├── uploads/
 │   ├── images/
 │   ├── documents/
@@ -88,19 +119,18 @@ portfolio-backend/
 ├── .gitignore
 ├── .eslintrc.js
 ├── jest.config.js
-├── app.js
-├── server.js
+├── tsconfig.json
 └── package.json
 ```
 
-### Step 4: Set Up Express Server
+### Step 5: Set Up Express Server with TypeScript
 
-Create `server.js` as your entry point:
+Create `src/server.ts` as your entry point:
 
-```javascript
-const app = require('./app');
-const connectDB = require('./config/db');
-const dotenv = require('dotenv');
+```typescript
+import app from './app';
+import connectDB from './config/db';
+import dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config();
@@ -108,33 +138,34 @@ dotenv.config();
 // Connect to database
 connectDB();
 
-const PORT = process.env.PORT || 5000;
+const PORT: number = parseInt(process.env.PORT || '5000', 10);
 
 app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
 ```
 
-Create `app.js` for Express configuration:
+Create `src/app.ts` for Express configuration:
 
-```javascript
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const errorHandler = require('./middleware/errorHandler');
+```typescript
+import express, { Application } from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import path from 'path';
+import errorHandler from './middleware/errorHandler';
 
 // Import routes
-const authRoutes = require('./routes/authRoutes');
-const profileRoutes = require('./routes/profileRoutes');
-const projectRoutes = require('./routes/projectRoutes');
-const skillRoutes = require('./routes/skillRoutes');
-const experienceRoutes = require('./routes/experienceRoutes');
-const educationRoutes = require('./routes/educationRoutes');
-const researchRoutes = require('./routes/researchRoutes');
-const contactRoutes = require('./routes/contactRoutes');
+import authRoutes from './routes/authRoutes';
+import profileRoutes from './routes/profileRoutes';
+import projectRoutes from './routes/projectRoutes';
+import skillRoutes from './routes/skillRoutes';
+import experienceRoutes from './routes/experienceRoutes';
+import educationRoutes from './routes/educationRoutes';
+import researchRoutes from './routes/researchRoutes';
+import contactRoutes from './routes/contactRoutes';
 
-const app = express();
+const app: Application = express();
 
 // Middleware
 app.use(express.json());
@@ -154,53 +185,87 @@ app.use('/api/research', researchRoutes);
 app.use('/api/contact', contactRoutes);
 
 // Serve uploaded files
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Error handler
 app.use(errorHandler);
 
-module.exports = app;
+export default app;
 ```
 
-### Step 5: Database Connection
+### Step 6: Database Connection with TypeScript
 
-Create `config/db.js`:
+Create `src/config/db.ts`:
 
-```javascript
-const mongoose = require('mongoose');
+```typescript
+import mongoose from 'mongoose';
 
-const connectDB = async () => {
+const connectDB = async (): Promise<void> => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const conn = await mongoose.connect(process.env.MONGO_URI || '');
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    console.error(`Error: ${error instanceof Error ? error.message : String(error)}`);
     process.exit(1);
   }
 };
 
-module.exports = connectDB;
+export default connectDB;
 ```
 
 ## Single-User Authentication System
 
 Since this is a personal portfolio where only I need access to the admin dashboard:
 
+### Define TypeScript Interfaces
+
+Create `src/types/custom.d.ts` for project-wide type definitions:
+
+```typescript
+// Define interfaces for request augmentation
+declare namespace Express {
+  export interface Request {
+    user?: any;
+  }
+}
+
+// Define admin user interface
+export interface IUser {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  lastLogin: Date;
+  loginAttempts: number;
+  lockUntil?: Date;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
 ### Admin User Setup
-```javascript
+```typescript
 // In a separate setup script or as part of initial database seeding
-const createAdminUser = async () => {
+import User from '../models/User';
+import Profile from '../models/Profile';
+import bcrypt from 'bcryptjs';
+
+interface CreateAdminResult {
+  success: boolean;
+  message: string;
+}
+
+const createAdminUser = async (): Promise<CreateAdminResult> => {
   try {
     const adminExists = await User.findOne({ email: process.env.ADMIN_EMAIL });
     
     if (adminExists) {
-      return console.log('Admin user already exists');
+      return { success: false, message: 'Admin user already exists' };
     }
     
-    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
+    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || '', 10);
     
     const admin = await User.create({
       name: 'MD Mahbub Alam',
@@ -217,9 +282,12 @@ const createAdminUser = async () => {
       // Other default profile values
     });
     
-    console.log('Admin user created successfully');
+    return { success: true, message: 'Admin user created successfully' };
   } catch (error) {
-    console.error('Error creating admin user:', error);
+    return { 
+      success: false, 
+      message: `Error creating admin user: ${error instanceof Error ? error.message : String(error)}` 
+    };
   }
 };
 ```
@@ -238,11 +306,29 @@ ADMIN_PASSWORD=your-secure-password
 - Implement automatic logout on inactivity
 - Store login session information
 
-## Enhanced Database Schema Design
+## Enhanced Database Schema Design with TypeScript
 
 ### User Schema (Modified for Single-User System)
-```javascript
-const userSchema = new mongoose.Schema({
+```typescript
+import mongoose, { Schema, Document, Model } from 'mongoose';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+export interface IUserDocument extends Document {
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  lastLogin: Date;
+  loginAttempts: number;
+  lockUntil?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  matchPassword(enteredPassword: string): Promise<boolean>;
+  getSignedJwtToken(): string;
+}
+
+const userSchema: Schema = new Schema({
   name: {
     type: String,
     required: [true, 'Name is required'],
@@ -255,10 +341,10 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     trim: true,
     validate: {
-      validator: function(v) {
+      validator: function(v: string): boolean {
         return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v);
       },
-      message: props => `${props.value} is not a valid email!`
+      message: (props: { value: string }) => `${props.value} is not a valid email!`
     }
   },
   password: {
@@ -288,7 +374,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Pre-save middleware to hash password
-userSchema.pre('save', async function(next) {
+userSchema.pre<IUserDocument>('save', async function(next) {
   if (!this.isModified('password')) return next();
   
   try {
@@ -296,16 +382,86 @@ userSchema.pre('save', async function(next) {
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {
-    next(error);
+    next(error instanceof Error ? error : new Error('Password hashing error'));
   }
 });
 
-// Additional methods remain the same
+// Method to compare password
+userSchema.methods.matchPassword = async function(enteredPassword: string): Promise<boolean> {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+// Method to generate JWT token
+userSchema.methods.getSignedJwtToken = function(): string {
+  return jwt.sign(
+    { id: this._id }, 
+    process.env.JWT_SECRET || 'fallbacksecret', 
+    { expiresIn: process.env.JWT_EXPIRE || '1h' }
+  );
+};
+
+const User: Model<IUserDocument> = mongoose.model<IUserDocument>('User', userSchema);
+
+export default User;
 ```
 
 ### Profile Schema
-```javascript
-const profileSchema = new mongoose.Schema({
+```typescript
+import mongoose, { Schema, Document, Model } from 'mongoose';
+
+export interface ISocialLinks {
+  github?: string;
+  linkedin?: string;
+  twitter?: string;
+  facebook?: string;
+  instagram?: string;
+  youtube?: string;
+  website?: string;
+  medium?: string;
+  stackoverflow?: string;
+}
+
+export interface ILanguage {
+  name: string;
+  proficiency: 'Basic' | 'Intermediate' | 'Fluent' | 'Native';
+}
+
+export interface ICertification {
+  name: string;
+  issuer: string;
+  date: Date;
+  link?: string;
+}
+
+export interface IProfileDocument extends Document {
+  user: mongoose.Types.ObjectId;
+  bio: string;
+  avatar: string;
+  coverImage: string;
+  title: string;
+  location?: {
+    city?: string;
+    country?: string;
+    coordinates?: number[];
+  };
+  about?: string;
+  skills: mongoose.Types.ObjectId[];
+  socialLinks: ISocialLinks;
+  resume?: string;
+  portfolioTheme: string;
+  featuredProjects: mongoose.Types.ObjectId[];
+  languages: ILanguage[];
+  interests: string[];
+  certifications: ICertification[];
+  metrics: {
+    profileViews: number;
+    downloadsResume: number;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const profileSchema: Schema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -420,11 +576,71 @@ profileSchema.virtual('blogCount', {
   foreignField: 'author',
   count: true
 });
+
+const Profile: Model<IProfileDocument> = mongoose.model<IProfileDocument>('Profile', profileSchema);
+
+export default Profile;
 ```
 
 ### Project Schema
-```javascript
-const projectSchema = new mongoose.Schema({
+```typescript
+import mongoose, { Schema, Document, Model } from 'mongoose';
+import slugify from 'slugify';
+import shortid from 'shortid';
+
+export interface IProjectImage {
+  url: string;
+  caption?: string;
+  isPrimary: boolean;
+}
+
+export interface IProjectTeamMember {
+  name: string;
+  role?: string;
+  link?: string;
+}
+
+export interface IProjectVideo {
+  platform: 'YouTube' | 'Vimeo' | 'Other';
+  url: string;
+  title?: string;
+}
+
+export interface IProjectDocument extends Document {
+  user: mongoose.Types.ObjectId;
+  title: string;
+  slug: string;
+  description: {
+    short: string;
+    detailed: string;
+  };
+  images: IProjectImage[];
+  technologies: string[];
+  links: {
+    github?: string;
+    live?: string;
+    demo?: string;
+    documentation?: string;
+  };
+  featured: boolean;
+  category: 'Web Development' | 'Machine Learning' | 'Data Science' | 'Mobile App' | 'Research' | 'Game Development' | 'Other';
+  duration: {
+    startDate?: Date;
+    endDate?: Date;
+    ongoing: boolean;
+  };
+  team: IProjectTeamMember[];
+  achievements: string[];
+  metrics: {
+    views: number;
+    likes: number;
+  };
+  videos: IProjectVideo[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const projectSchema: Schema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -518,878 +734,141 @@ const projectSchema = new mongoose.Schema({
 });
 
 // Generate slug before saving
-projectSchema.pre('save', function(next) {
+projectSchema.pre<IProjectDocument>('save', function(next) {
   if (this.isModified('title')) {
     this.slug = slugify(this.title, { lower: true }) + '-' + shortid.generate();
   }
   next();
 });
+
+const Project: Model<IProjectDocument> = mongoose.model<IProjectDocument>('Project', projectSchema);
+
+export default Project;
 ```
 
-### Skill Schema
-```javascript
-const skillSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  name: {
-    type: String,
-    required: [true, 'Skill name is required'],
-    trim: true
-  },
-  level: {
-    type: Number,
-    min: [1, 'Level must be at least 1'],
-    max: [10, 'Level cannot be more than 10'],
-    required: true
-  },
-  category: {
-    type: String,
-    enum: [
-      'Programming Languages', 
-      'Frontend Technologies', 
-      'Backend Technologies',
-      'Databases', 
-      'DevOps', 
-      'Mobile Development',
-      'Machine Learning', 
-      'Data Science',
-      'Cloud Services', 
-      'Tools', 
-      'Soft Skills', 
-      'Other'
-    ],
-    required: true
-  },
-  yearsExperience: {
-    type: Number,
-    min: 0
-  },
-  description: String,
-  icon: String,
-  featured: {
-    type: Boolean,
-    default: false
-  },
-  relatedProjects: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project'
-  }]
-}, { timestamps: true });
+## Sample TypeScript Controller
 
-// Compound index to ensure user cannot have duplicate skills
-skillSchema.index({ user: 1, name: 1 }, { unique: true });
-```
+```typescript
+import { Request, Response } from 'express';
+import User from '../models/User';
+import { IUserDocument } from '../models/User';
 
-### Experience Schema
-```javascript
-const experienceSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  position: {
-    type: String,
-    required: [true, 'Position is required'],
-    trim: true
-  },
-  company: {
-    type: String,
-    required: [true, 'Company is required'],
-    trim: true
-  },
-  logo: String,
-  location: {
-    city: String,
-    country: String,
-    remote: {
-      type: Boolean,
-      default: false
+// Define extended request with user property
+interface AuthenticatedRequest extends Request {
+  user?: IUserDocument;
+}
+
+// @desc    Login user
+// @route   POST /api/auth/login
+// @access  Public
+export const login = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate email & password
+    if (!email || !password) {
+      res.status(400).json({
+        success: false,
+        message: 'Please provide email and password'
+      });
+      return;
     }
-  },
-  employmentType: {
-    type: String,
-    enum: ['Full-time', 'Part-time', 'Self-employed', 'Freelance', 'Contract', 'Internship', 'Apprenticeship', 'Volunteer'],
-    default: 'Full-time'
-  },
-  startDate: {
-    type: Date,
-    required: true
-  },
-  endDate: {
-    type: Date
-  },
-  current: {
-    type: Boolean,
-    default: false
-  },
-  description: {
-    type: String,
-    required: [true, 'Description is required']
-  },
-  responsibilities: [{
-    type: String,
-    trim: true
-  }],
-  achievements: [{
-    type: String,
-    trim: true
-  }],
-  technologies: [{
-    type: String,
-    trim: true
-  }],
-  url: String,
-  hideFromProfile: {
-    type: Boolean,
-    default: false
-  }
-}, { 
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
-});
 
-// Custom method to calculate duration
-experienceSchema.methods.getDuration = function() {
-  const end = this.current ? new Date() : this.endDate;
-  if (!end) return null;
-  
-  const start = this.startDate;
-  const months = (end.getFullYear() - start.getFullYear()) * 12 + 
-                 end.getMonth() - start.getMonth();
-  
-  const years = Math.floor(months / 12);
-  const remainingMonths = months % 12;
-  
-  return { years, months: remainingMonths, totalMonths: months };
+    // Check for user
+    const user = await User.findOne({ email }).select('+password');
+
+    if (!user) {
+      res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+      return;
+    }
+
+    // Check if password matches
+    const isMatch = await user.matchPassword(password);
+
+    if (!isMatch) {
+      res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+      return;
+    }
+
+    // Update last login
+    user.lastLogin = new Date();
+    await user.save();
+
+    // Create token
+    const token = user.getSignedJwtToken();
+
+    res.status(200).json({
+      success: true,
+      token
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error instanceof Error ? error.message : 'Server error'
+    });
+  }
+};
+
+// @desc    Get current logged in user
+// @route   GET /api/auth/me
+// @access  Private
+export const getMe = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  try {
+    const userId = req.user?._id;
+    
+    if (!userId) {
+      res.status(401).json({ 
+        success: false, 
+        message: 'Not authorized' 
+      });
+      return;
+    }
+    
+    const user = await User.findById(userId);
+
+    res.status(200).json({
+      success: true,
+      data: user
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error instanceof Error ? error.message : 'Server error'
+    });
+  }
 };
 ```
 
-### Education Schema
-```javascript
-const educationSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  institution: {
-    type: String,
-    required: [true, 'Institution name is required'],
-    trim: true
-  },
-  logo: String,
-  degree: {
-    type: String,
-    required: [true, 'Degree is required'],
-    trim: true
-  },
-  field: {
-    type: String,
-    required: [true, 'Field of study is required'],
-    trim: true
-  },
-  location: {
-    city: String,
-    country: String
-  },
-  startDate: {
-    type: Date,
-    required: true
-  },
-  endDate: {
-    type: Date
-  },
-  current: {
-    type: Boolean,
-    default: false
-  },
-  description: {
-    type: String
-  },
-  achievements: [{
-    type: String,
-    trim: true
-  }],
-  activities: [{
-    type: String,
-    trim: true
-  }],
-  courses: [{
-    name: String,
-    grade: String
-  }],
-  thesis: {
-    title: String,
-    description: String,
-    supervisors: [String],
-    url: String
-  },
-  gpa: {
-    score: Number,
-    scale: {
-      type: Number,
-      default: 4.0
-    }
-  },
-  url: String
-}, { 
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
-});
+## Update package.json Scripts
+
+```json
+"scripts": {
+  "start": "node dist/server.js",
+  "build": "tsc",
+  "dev": "nodemon --exec ts-node src/server.ts",
+  "test": "jest",
+  "lint": "eslint . --ext .ts",
+  "lint:fix": "eslint . --ext .ts --fix"
+}
 ```
-
-### Research Schema
-```javascript
-const researchSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  title: {
-    type: String,
-    required: [true, 'Research title is required'],
-    trim: true
-  },
-  slug: {
-    type: String,
-    unique: true
-  },
-  authors: [{
-    name: {
-      type: String,
-      required: true
-    },
-    affiliation: String,
-    isMainAuthor: {
-      type: Boolean,
-      default: false
-    },
-    orcid: String
-  }],
-  publishedIn: {
-    name: {
-      type: String,
-      required: true
-    },
-    type: {
-      type: String,
-      enum: ['Journal', 'Conference', 'Workshop', 'Book', 'Preprint', 'Other']
-    },
-    publisher: String,
-    url: String
-  },
-  publishDate: {
-    type: Date
-  },
-  abstract: {
-    type: String,
-    required: [true, 'Abstract is required']
-  },
-  keywords: [{
-    type: String,
-    trim: true
-  }],
-  doi: {
-    type: String,
-    trim: true
-  },
-  links: {
-    paper: String,
-    code: String,
-    dataset: String,
-    slides: String,
-    video: String,
-    poster: String
-  },
-  category: {
-    type: String,
-    required: true
-  },
-  pdf: {
-    type: String
-  },
-  citations: {
-    count: {
-      type: Number,
-      default: 0
-    },
-    lastUpdated: Date
-  },
-  impactFactor: Number,
-  metrics: {
-    views: {
-      type: Number,
-      default: 0
-    },
-    downloads: {
-      type: Number,
-      default: 0
-    }
-  },
-  relatedProjects: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project'
-  }]
-}, {
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
-});
-
-// Generate slug before saving
-researchSchema.pre('save', function(next) {
-  if (this.isModified('title')) {
-    this.slug = slugify(this.title, { lower: true }) + '-' + shortid.generate();
-  }
-  next();
-});
-```
-
-### Blog Schema
-```javascript
-const blogSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: [true, 'Title is required'],
-    trim: true,
-    maxlength: [200, 'Title cannot be longer than 200 characters']
-  },
-  slug: {
-    type: String,
-    unique: true
-  },
-  content: {
-    type: String,
-    required: [true, 'Content is required']
-  },
-  contentHTML: {
-    type: String
-  },
-  excerpt: {
-    type: String,
-    maxlength: [500, 'Excerpt cannot be longer than 500 characters']
-  },
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  featuredImage: {
-    type: String
-  },
-  images: [{
-    url: String,
-    alt: String,
-    caption: String
-  }],
-  categories: [{
-    type: String,
-    trim: true
-  }],
-  tags: [{
-    type: String,
-    trim: true
-  }],
-  status: {
-    type: String,
-    enum: ['draft', 'published', 'archived'],
-    default: 'draft'
-  },
-  publishedAt: {
-    type: Date
-  },
-  featured: {
-    type: Boolean,
-    default: false
-  },
-  metaData: {
-    description: {
-      type: String,
-      maxlength: [160, 'Meta description cannot be longer than 160 characters']
-    },
-    keywords: [String],
-    ogImage: String
-  },
-  readingTime: {
-    type: Number,
-    default: 0
-  },
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  views: {
-    type: Number,
-    default: 0
-  },
-  relatedPosts: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Blog'
-  }],
-  relatedResearch: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Research'
-  }],
-  relatedProjects: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project'
-  }]
-}, { 
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
-});
-
-// Generate slug before saving
-blogSchema.pre('save', function(next) {
-  // Generate slug from title
-  if (this.isModified('title')) {
-    this.slug = slugify(this.title, { lower: true }) + '-' + shortid.generate();
-  }
-  
-  // Generate HTML from markdown content
-  if (this.isModified('content')) {
-    this.contentHTML = marked(this.content);
-    
-    // Calculate reading time
-    const words = this.content.split(/\s+/).length;
-    this.readingTime = Math.ceil(words / 200); // Assuming 200 words per minute
-    
-    // Generate excerpt if not provided
-    if (!this.excerpt) {
-      this.excerpt = this.content
-        .replace(/[#*_~`]/g, '') // Remove markdown symbols
-        .substring(0, 160)
-        .trim() + '...';
-    }
-  }
-  
-  // Set published date when status changes to published
-  if (this.isModified('status') && this.status === 'published' && !this.publishedAt) {
-    this.publishedAt = Date.now();
-  }
-  
-  next();
-});
-
-// Virtual to get comments
-blogSchema.virtual('comments', {
-  ref: 'Comment',
-  localField: '_id',
-  foreignField: 'blog'
-});
-```
-
-### Comment Schema
-```javascript
-const commentSchema = new mongoose.Schema({
-  blog: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Blog',
-    required: true
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  name: {
-    type: String,
-    required: function() {
-      return !this.user;
-    },
-    trim: true
-  },
-  email: {
-    type: String,
-    required: function() {
-      return !this.user;
-    },
-    trim: true,
-    lowercase: true,
-    validate: {
-      validator: function(v) {
-        return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v);
-      },
-      message: 'Please enter a valid email'
-    }
-  },
-  content: {
-    type: String,
-    required: [true, 'Comment text is required'],
-    trim: true
-  },
-  parentComment: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Comment'
-  },
-  approved: {
-    type: Boolean,
-    default: function() {
-      return !!this.user; // Auto-approve comments from registered users
-    }
-  },
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  ipAddress: String,
-  userAgent: String
-}, { 
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true } 
-});
-
-// Virtual to get replies
-commentSchema.virtual('replies', {
-  ref: 'Comment',
-  localField: '_id',
-  foreignField: 'parentComment'
-});
-```
-
-### Contact Schema
-```javascript
-const contactSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Name is required'],
-    trim: true
-  },
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    trim: true,
-    lowercase: true,
-    validate: {
-      validator: function(v) {
-        return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v);
-      },
-      message: props => `${props.value} is not a valid email`
-    }
-  },
-  subject: {
-    type: String,
-    required: [true, 'Subject is required'],
-    trim: true
-  },
-  message: {
-    type: String,
-    required: [true, 'Message is required'],
-    trim: true
-  },
-  read: {
-    type: Boolean,
-    default: false
-  },
-  replied: {
-    type: Boolean,
-    default: false
-  },
-  repliedAt: Date,
-  replyMessage: String,
-  category: {
-    type: String,
-    enum: ['Project Inquiry', 'Job Opportunity', 'Research Collaboration', 'Speaking Engagement', 'General', 'Other'],
-    default: 'General'
-  },
-  priority: {
-    type: String,
-    enum: ['Low', 'Medium', 'High'],
-    default: 'Medium'
-  },
-  ipAddress: String,
-  userAgent: String,
-  tag: [String]
-}, { timestamps: true });
-```
-
-## Additional Features
-
-### Site Configuration Schema
-```javascript
-const siteConfigSchema = new mongoose.Schema({
-  siteTitle: {
-    type: String,
-    required: true,
-    default: 'MD Mahbub Alam - Portfolio'
-  },
-  tagline: String,
-  metaDescription: {
-    type: String,
-    maxlength: 160
-  },
-  keywords: [String],
-  favicon: String,
-  logoLight: String,
-  logoDark: String,
-  primaryColor: {
-    type: String,
-    default: '#3498db'
-  },
-  secondaryColor: {
-    type: String,
-    default: '#2c3e50'
-  },
-  showResearchSection: {
-    type: Boolean,
-    default: true
-  },
-  showBlogSection: {
-    type: Boolean,
-    default: true
-  },
-  showProjectsSection: {
-    type: Boolean,
-    default: true
-  },
-  featuredSections: [{
-    name: String,
-    enabled: Boolean,
-    order: Number
-  }],
-  socialShareEnabled: {
-    type: Boolean,
-    default: true
-  },
-  googleAnalyticsId: String,
-  disqusShortname: String,
-  contactFormEmail: String,
-  maintenanceMode: {
-    type: Boolean,
-    default: false
-  },
-  maintenanceMessage: String
-}, {
-  timestamps: true
-});
-```
-
-### Github Repository Integration
-```javascript
-const githubRepoSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  fullName: {
-    type: String,
-    required: true
-  },
-  description: String,
-  url: {
-    type: String,
-    required: true
-  },
-  homepage: String,
-  language: String,
-  stargazersCount: {
-    type: Number,
-    default: 0
-  },
-  forksCount: {
-    type: Number,
-    default: 0
-  },
-  watchersCount: {
-    type: Number,
-    default: 0
-  },
-  openIssuesCount: {
-    type: Number,
-    default: 0
-  },
-  topics: [String],
-  featured: {
-    type: Boolean,
-    default: false
-  },
-  showOnPortfolio: {
-    type: Boolean,
-    default: true
-  },
-  linkedProject: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project'
-  },
-  lastSyncedAt: {
-    type: Date,
-    default: Date.now
-  },
-  customDescription: String,
-  customImageUrl: String
-}, {
-  timestamps: true
-});
-```
-
-### Newsletter Subscription Schema
-```javascript
-const newsletterSubscriptionSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    unique: true,
-    lowercase: true,
-    trim: true,
-    validate: {
-      validator: function(v) {
-        return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v);
-      },
-      message: props => `${props.value} is not a valid email!`
-    }
-  },
-  name: {
-    type: String,
-    trim: true
-  },
-  subscriptionDate: {
-    type: Date,
-    default: Date.now
-  },
-  active: {
-    type: Boolean,
-    default: true
-  },
-  unsubscribeToken: {
-    type: String,
-    required: true
-  },
-  source: {
-    type: String,
-    enum: ['blog', 'portfolio', 'contact_form', 'manual', 'other'],
-    default: 'portfolio'
-  },
-  interests: [String],
-  lastEmailSent: Date
-}, {
-  timestamps: true
-});
-```
-
-## API Endpoints
-
-### Authentication (Updated for Single-User System)
-- `POST /api/auth/login` - Login as admin
-- `POST /api/auth/logout` - Logout admin session
-- `GET /api/auth/me` - Get admin profile
-- `PUT /api/auth/password` - Update admin password
-
-### Profile
-- `GET /api/profile` - Get profile
-- `PUT /api/profile` - Update profile
-- `POST /api/profile/upload-avatar` - Upload profile picture
-- `POST /api/profile/upload-resume` - Upload resume
-
-### Projects
-- `GET /api/projects` - Get all projects
-- `POST /api/projects` - Create new project
-- `GET /api/projects/:id` - Get project by ID
-- `PUT /api/projects/:id` - Update project
-- `DELETE /api/projects/:id` - Delete project
-- `POST /api/projects/:id/upload-image` - Upload project image
-
-### Skills
-- `GET /api/skills` - Get all skills
-- `POST /api/skills` - Add new skill
-- `PUT /api/skills/:id` - Update skill
-- `DELETE /api/skills/:id` - Delete skill
-
-### Experience
-- `GET /api/experience` - Get all experiences
-- `POST /api/experience` - Add new experience
-- `PUT /api/experience/:id` - Update experience
-- `DELETE /api/experience/:id` - Delete experience
-
-### Education
-- `GET /api/education` - Get all education
-- `POST /api/education` - Add new education
-- `PUT /api/education/:id` - Update education
-- `DELETE /api/education/:id` - Delete education
-
-### Research
-- `GET /api/research` - Get all research papers
-- `POST /api/research` - Add new research
-- `PUT /api/research/:id` - Update research
-- `DELETE /api/research/:id` - Delete research
-- `POST /api/research/:id/upload-pdf` - Upload research PDF
-
-### Contact
-- `POST /api/contact` - Submit contact message
-- `GET /api/contact` - Get all contact messages (admin only)
-- `GET /api/contact/:id` - Get contact message by ID
-- `PUT /api/contact/:id` - Mark message as read/replied
-
-### Blogs
-- `GET /api/blogs` - Get all published blogs with pagination
-- `GET /api/blogs/featured` - Get featured blogs
-- `GET /api/blogs/categories` - Get blog categories
-- `GET /api/blogs/tags` - Get blog tags
-- `GET /api/blogs/search` - Search blogs
-- `GET /api/blogs/:slug` - Get blog by slug
-- `GET /api/blogs/author/:userId` - Get blogs by author
-- `GET /api/blogs/tag/:tag` - Get blogs by tag
-- `GET /api/blogs/category/:category` - Get blogs by category
-- `GET /api/blogs/related/:blogId` - Get related blogs
-- `POST /api/blogs` - Create new blog (admin only)
-- `PUT /api/blogs/:id` - Update blog (admin only)
-- `DELETE /api/blogs/:id` - Delete blog (admin only)
-- `POST /api/blogs/:id/upload-image` - Upload blog image (admin only)
-- `PUT /api/blogs/:id/publish` - Publish blog (admin only)
-- `PUT /api/blogs/:id/unpublish` - Unpublish blog (admin only)
-- `POST /api/blogs/:id/like` - Like a blog
-- `DELETE /api/blogs/:id/like` - Unlike a blog
-- `GET /api/blogs/:id/likes` - Get users who liked a blog
-
-### Comments
-- `GET /api/blogs/:blogId/comments` - Get comments for a blog
-- `POST /api/blogs/:blogId/comments` - Add comment to blog
-- `PUT /api/comments/:id` - Update comment (owner or admin only)
-- `DELETE /api/comments/:id` - Delete comment (owner or admin only)
-- `PUT /api/comments/:id/approve` - Approve comment (admin only)
-- `POST /api/comments/:id/reply` - Reply to a comment
-- `POST /api/comments/:id/like` - Like a comment
-- `DELETE /api/comments/:id/like` - Unlike a comment
-
-### Site Configuration
-- `GET /api/config` - Get public site configuration
-- `GET /api/config/all` - Get all site configuration (admin only)
-- `PUT /api/config` - Update site configuration (admin only)
-- `POST /api/config/logo` - Upload site logo (admin only)
-- `POST /api/config/favicon` - Upload site favicon (admin only)
-
-### GitHub Repositories
-- `GET /api/github` - Get featured GitHub repositories
-- `GET /api/github/all` - Get all GitHub repositories (admin only)
-- `POST /api/github/sync` - Sync repositories from GitHub (admin only)
-- `PUT /api/github/:id` - Update repository details (admin only)
-- `PUT /api/github/:id/feature` - Toggle featured status (admin only)
-
-### Newsletter
-- `POST /api/newsletter/subscribe` - Subscribe to newsletter
-- `GET /api/newsletter/subscribers` - Get all subscribers (admin only)
-- `DELETE /api/newsletter/:id` - Delete subscriber (admin only)
-- `POST /api/newsletter/send` - Send newsletter to subscribers (admin only)
-- `GET /api/newsletter/unsubscribe/:token` - Unsubscribe using token
 
 ## Next Steps
 
-1. Implement the controllers and routes for each endpoint
+1. Implement the controllers and routes for each endpoint using TypeScript
 2. Set up the single-user authentication system with secure login
 3. Create a dashboard initialization script to create the admin user on first run
 4. Create file upload functionality for images and documents
 5. Implement GitHub API integration for automatic repository syncing
 6. Set up newsletter sending functionality with templates
 7. Create a site configuration management system
-8. Implement error handling and data validation
-9. Write tests for your API endpoints
+8. Implement error handling and data validation using TypeScript interfaces
+9. Write tests for your API endpoints using Jest and TypeScript
 10. Deploy to a hosting service (Heroku, DigitalOcean, etc.)
 11. Document your API for future frontend integration
 
