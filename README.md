@@ -1,1080 +1,289 @@
-# MD Mahbub Alam - Portfolio Backend
+# Professional Portfolio Website
 
-A robust backend API for my portfolio website to showcase my skills, projects, research, professional experience, and blog content.
-
-## 📋 Table of Contents
-- [Tech Stack](#tech-stack)
-- [Project Setup Guide](#project-setup-guide)
-- [API Documentation](#api-documentation)
-- [Authentication System](#single-user-authentication-system)
-- [Database Schema Design](#enhanced-database-schema-design-with-typescript)
-- [Development Guidelines](#development-guidelines)
-- [Testing Strategy](#testing-strategy)
-- [Deployment Guide](#deployment-guide)
-- [Security Best Practices](#security-best-practices)
-- [Performance Optimization](#performance-optimization)
-- [Monitoring and Analytics](#analytics-and-metrics)
-- [CI/CD Pipeline](#devops-and-cicd)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
+A visually stunning portfolio website to showcase expertise as a Backend Engineer and AI/ML Researcher, built with React, TypeScript, Tailwind CSS, and 3D visualizations.
 
 ## Tech Stack
 
-### Core Technologies
-- **MongoDB v5.0+**: NoSQL document database for flexible data modeling
-- **Express.js v4.18+**: Fast, unopinionated web framework for Node.js
-- **Node.js v16+**: JavaScript runtime built on Chrome's V8 engine
-- **TypeScript v4.7+**: Strongly typed programming language that builds on JavaScript
+- **Frontend Framework:** React 18 with TypeScript for type-safe development
+- **Styling:** Tailwind CSS for responsive and efficient design implementation
+- **3D Visualizations:** Three.js with React Three Fiber for 3D objects and scenes
+- **3D UI Components:** Drei for enhanced Three.js components and abstractions
+- **Particle Simulations:** react-tsparticles for dynamic, interactive particle effects
+- **Animation:** Framer Motion for smooth transitions and UI animations
+- **Routing:** React Router v6 for seamless page navigation
+- **Build System:** Vite for fast development and optimized production builds
+- **Deployment:** Vercel/Netlify for continuous deployment
 
-### Authentication & Security
-- **JWT**: JSON Web Tokens for secure authentication
-- **bcryptjs**: Library for hashing passwords
-- **helmet**: Helps secure Express apps with various HTTP headers
-- **cors**: Package for providing Connect/Express middleware for CORS support
-- **rate-limiter-flexible**: Protection against brute force attacks
+## Project Structure
 
-### Data Validation & Processing
-- **mongoose**: MongoDB object modeling for Node.js
-- **validator**: String validation library
-- **multer**: Middleware for handling multipart/form-data (file uploads)
-- **slugify**: Creates URL-friendly slugs from strings
-- **marked**: Markdown parser and compiler for transforming markdown content
+```
+portfolio-my/
+├── public/
+│   ├── assets/
+│   │   ├── models/       # 3D models
+│   │   ├── images/       # Images and icons
+│   │   └── fonts/        # Custom fonts for 3D text
+│   └── favicon.svg       # Website favicon
+├── src/
+│   ├── components/
+│   │   ├── layout/       # Layout components (Navbar, Footer, etc.)
+│   │   │   ├── Layout.tsx        # Main layout wrapper
+│   │   │   ├── Navbar.tsx        # Navigation component
+│   │   │   └── Footer.tsx        # Footer component
+│   │   ├── ui/           # Reusable UI components
+│   │   ├── 3d/           # Three.js components
+│   │   │   └── HeroScene.tsx     # 3D scene for hero section
+│   │   └── particles/    # Particle effect components
+│   │       └── ParticleBackground.tsx # Background particle effect
+│   ├── pages/            # Page components
+│   │   ├── Home.tsx      # Landing page
+│   │   ├── Projects.tsx  # Projects showcase page
+│   │   ├── Research.tsx  # Research and publications page
+│   │   ├── Blog.tsx      # Blog articles page
+│   │   ├── Contact.tsx   # Contact form page
+│   │   └── NotFound.tsx  # 404 error page
+│   ├── hooks/            # Custom React hooks
+│   ├── types/            # TypeScript type definitions
+│   ├── utils/            # Utility functions
+│   ├── styles/           # Global styles
+│   │   └── index.css     # Global CSS with Tailwind imports
+│   ├── App.tsx           # Main app component with routing
+│   └── main.tsx          # Entry point
+├── tsconfig.json         # TypeScript configuration
+├── tsconfig.node.json    # TypeScript configuration for Node environment
+├── tailwind.config.js    # Tailwind CSS configuration
+├── vite.config.ts        # Vite configuration
+└── package.json          # Project dependencies and scripts
+```
 
-### Performance & Optimization
-- **compression**: Compression middleware to improve response speed
-- **redis** (optional): In-memory data structure store for caching
-- **sharp**: Image processing library for resizing uploaded images
+## Features
 
-## Project Setup Guide
+### 1. Interactive 3D Hero Section
+- **Floating 3D objects** representing backend technologies (Java/Spring Boot icons, databases, cloud services)
+- **Interactive particle effects** that respond to cursor movement
+- **Dynamic camera animations** and smooth transitions
+- **Orbital controls** for user interaction with 3D elements
+- **Optimized rendering** with viewport detection to improve performance
+
+### 2. Professional Background Section
+- **Animated timeline** of professional journey with Framer Motion
+- **Interactive tech stack visualization** with hover effects
+- **Responsive card layouts** for displaying expertise areas
+- **Optimized animations** that trigger on scroll into view
+
+### 3. Backend Engineering Showcase
+- **Project cards** with 3D depth effects and hover animations
+- **Category filtering system** for organizing projects by type
+- **Interactive architecture diagrams** for complex systems
+- **Code snippets** with syntax highlighting for technical examples
+- **Detailed project information** with technologies used and links
+
+### 4. AI/ML Research Section
+- **Interactive visualizations** of machine learning models
+- **Publication showcases** with academic and industry research papers
+- **Research area categorization** with visual indicators
+- **Collaboration highlights** with partner organizations
+
+### 5. Blog/Publications
+- **Category-based filtering** for easy content navigation
+- **Card-based article previews** with automated read time calculation
+- **Newsletter subscription** for content updates
+- **Responsive grid layouts** for various screen sizes
+
+### 6. Contact Form
+- **Interactive 3D elements** that respond to user interactions
+- **Real-time form validation** with visual feedback
+- **Animated success/error states** with Framer Motion
+- **Alternative contact methods** with social links
+- **Social media integration** for professional networking
+
+### 7. Dark/Light Mode
+- **System preference detection** for initial theme 
+- **Persistent user preference** with local storage
+- **Smooth theme transitions** between modes
+- **Tailored color schemes** for each theme
+
+## Implementation Details
+
+### React with TypeScript
+- Uses functional components with React Hooks
+- Leverages TypeScript for type safety and better developer experience
+- Implements proper component typing with interfaces and types
+
+### 3D Visualization with Three.js
+- Uses React Three Fiber for declarative Three.js implementation
+- Implements custom Three.js geometries and materials
+- Optimizes 3D rendering with proper mounting/unmounting
+- Uses Drei for enhanced Three.js components
+
+### Particle System
+- Configures different particle behaviors for various sections
+- Implements interactive particle responses to user actions
+- Optimizes particle count based on device performance
+- Uses react-tsparticles for efficient particle rendering
+
+### Animation System
+- Uses Framer Motion for page transitions and UI animations
+- Implements scroll-triggered animations with viewport detection
+- Creates smooth hover effects for interactive elements
+- Optimizes animations for performance
+
+### Responsive Design
+- Implements mobile-first design approach with Tailwind CSS
+- Creates adaptable layouts for various screen sizes
+- Adjusts 3D elements and effects based on device capabilities
+- Ensures accessibility across different devices
+
+## Getting Started
 
 ### Prerequisites
-- Node.js v16.x or higher
-- MongoDB v5.0+ (local installation or MongoDB Atlas account)
-- Git
-- NPM or Yarn
-- Redis (optional, for advanced caching)
+- Node.js (v14+)
+- npm or yarn
 
-### Step 1: Initialize Project
+### Installation
+
 ```bash
-mkdir portfolio-backend
-cd portfolio-backend
-npm init -y
+# Clone the repository
+git clone https://github.com/iammahbubalam/portfolio-website.git
+
+# Navigate to project directory
+cd portfolio-my
+
+# Install dependencies
+npm install
+# or
+yarn install
 ```
 
-### Step 2: Install Dependencies
+### Development
+
 ```bash
-# Install core dependencies
-npm install express mongoose dotenv cors helmet morgan jsonwebtoken bcryptjs validator multer slugify marked compression rate-limiter-flexible
-
-# Install TypeScript and type definitions
-npm install --save-dev typescript ts-node nodemon @types/node @types/express @types/mongoose @types/cors @types/helmet @types/morgan @types/jsonwebtoken @types/bcryptjs @types/validator @types/multer jest ts-jest @types/jest supertest @types/supertest
+# Start the development server
+npm run dev
+# or
+yarn dev
 ```
 
-### Step 3: Configure TypeScript
-Create a `tsconfig.json` file in the root directory:
+The application will be available at `http://localhost:3000`.
 
-```json
-{
-  "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "dist"]
-}
+### Building for Production
+
+```bash
+# Build the application
+npm run build
+# or
+yarn build
+
+# Preview the production build locally
+npm run preview
+# or
+yarn preview
 ```
 
-### Additional Configuration Files
+### Linting
 
-#### ESLint Configuration
-Create `.eslintrc.js` in the root directory:
-
-```javascript
-module.exports = {
-  parser: '@typescript-eslint/parser',
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
-    'plugin:prettier/recommended'
-  ],
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module'
-  },
-  rules: {
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
-  }
-};
+```bash
+# Run ESLint
+npm run lint
+# or
+yarn lint
 ```
 
-#### Jest Configuration
-Create `jest.config.js` in the root directory:
-
-```javascript
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  roots: ['<rootDir>/src', '<rootDir>/tests'],
-  testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'],
-  transform: {
-    '^.+\\.ts$': 'ts-jest'
-  },
-  collectCoverageFrom: [
-    'src/**/*.ts',
-    '!src/types/**/*.ts',
-    '!**/node_modules/**'
-  ],
-  coverageDirectory: 'coverage',
-  testPathIgnorePatterns: ['/node_modules/', '/dist/']
-};
-```
-
-#### Nodemon Configuration
-Create `nodemon.json` in the root directory:
-
-```json
-{
-  "watch": ["src"],
-  "ext": "ts",
-  "ignore": ["src/**/*.spec.ts"],
-  "exec": "ts-node ./src/server.ts"
-}
-```
-
-#### Environment Variables Template
-Create `.env.example` in the root directory:
-
-```
-# Server Configuration
-NODE_ENV=development
-PORT=5000
-
-# MongoDB Configuration
-MONGO_URI=mongodb://localhost:27017/portfolio
-
-# JWT Configuration
-JWT_SECRET=your_jwt_secret_here
-JWT_EXPIRE=1d
-JWT_COOKIE_EXPIRE=1
-
-# Admin Credentials
-ADMIN_EMAIL=your-email@example.com
-ADMIN_PASSWORD=your-secure-password
-
-# Email Configuration
-EMAIL_HOST=smtp.example.com
-EMAIL_PORT=587
-EMAIL_USER=your-email@example.com
-EMAIL_PASS=your-email-password
-EMAIL_FROM=your-email@example.com
-
-# File Upload Limits
-MAX_FILE_SIZE=5000000
-```
-
-### Step 4: Create Enhanced Project Structure
-```
-portfolio-backend/
-├── src/
-│   ├── config/
-│   │   ├── db.ts
-│   │   └── config.ts
-│   ├── controllers/
-│   │   ├── authController.ts
-│   │   ├── profileController.ts
-│   │   ├── projectController.ts
-│   │   ├── skillController.ts
-│   │   ├── experienceController.ts
-│   │   ├── educationController.ts
-│   │   ├── researchController.ts
-│   │   ├── blogController.ts
-│   │   └── contactController.ts
-│   ├── middleware/
-│   │   ├── auth.ts
-│   │   ├── errorHandler.ts
-│   │   ├── upload.ts
-│   │   ├── rateLimiter.ts
-│   │   ├── validate.ts
-│   │   └── cache.ts
-│   ├── models/
-│   │   ├── User.ts
-│   │   ├── Profile.ts
-│   │   ├── Project.ts
-│   │   ├── Skill.ts
-│   │   ├── Experience.ts
-│   │   ├── Education.ts
-│   │   ├── Research.ts
-│   │   ├── Blog.ts
-│   │   ├── Comment.ts
-│   │   └── Contact.ts
-│   ├── routes/
-│   │   ├── authRoutes.ts
-│   │   ├── profileRoutes.ts
-│   │   ├── projectRoutes.ts
-│   │   ├── skillRoutes.ts
-│   │   ├── experienceRoutes.ts
-│   │   ├── educationRoutes.ts
-│   │   ├── researchRoutes.ts
-│   │   ├── blogRoutes.ts
-│   │   └── contactRoutes.ts
-│   ├── services/
-│   │   ├── emailService.ts
-│   │   ├── cacheService.ts
-│   │   └── storageService.ts
-│   ├── utils/
-│   │   ├── helpers.ts
-│   │   ├── validators.ts
-│   │   └── logger.ts
-│   ├── types/
-│   │   ├── express.d.ts
-│   │   └── custom.d.ts
-│   ├── app.ts
-│   └── server.ts
-├── uploads/
-│   ├── images/
-│   ├── documents/
-│   └── thumbs/
-├── tests/
-│   ├── unit/
-│   └── integration/
-├── .env
-├── .gitignore
-├── .eslintrc.js
-├── jest.config.js
-├── nodemon.json
-├── tsconfig.json
-└── package.json
-```
-
-### Step 5: Set Up Express Server with TypeScript
-
-Create `src/server.ts` as your entry point:
-
-```typescript
-import app from './app';
-import connectDB from './config/db';
-import dotenv from 'dotenv';
-
-// Load environment variables
-dotenv.config();
-
-// Connect to database
-connectDB();
-
-const PORT: number = parseInt(process.env.PORT || '5000', 10);
-
-app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-});
-```
-
-Create `src/app.ts` for Express configuration:
-
-```typescript
-import express, { Application } from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import morgan from 'morgan';
-import path from 'path';
-import errorHandler from './middleware/errorHandler';
-
-// Import routes
-import authRoutes from './routes/authRoutes';
-import profileRoutes from './routes/profileRoutes';
-import projectRoutes from './routes/projectRoutes';
-import skillRoutes from './routes/skillRoutes';
-import experienceRoutes from './routes/experienceRoutes';
-import educationRoutes from './routes/educationRoutes';
-import researchRoutes from './routes/researchRoutes';
-import contactRoutes from './routes/contactRoutes';
-
-const app: Application = express();
-
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-app.use(helmet());
-app.use(morgan('dev'));
-
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/profile', profileRoutes);
-app.use('/api/projects', projectRoutes);
-app.use('/api/skills', skillRoutes);
-app.use('/api/experience', experienceRoutes);
-app.use('/api/education', educationRoutes);
-app.use('/api/research', researchRoutes);
-app.use('/api/contact', contactRoutes);
-
-// Serve uploaded files
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
-
-// Error handler
-app.use(errorHandler);
-
-export default app;
-```
-
-### Step 6: Database Connection with TypeScript
-
-Create `src/config/db.ts`:
-
-```typescript
-import mongoose from 'mongoose';
-
-const connectDB = async (): Promise<void> => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI || '');
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error(`Error: ${error instanceof Error ? error.message : String(error)}`);
-    process.exit(1);
-  }
-};
-
-export default connectDB;
-```
-
-## Single-User Authentication System
-
-Since this is a personal portfolio where only I need access to the admin dashboard:
-
-### Define TypeScript Interfaces
-
-Create `src/types/custom.d.ts` for project-wide type definitions:
-
-```typescript
-// Define interfaces for request augmentation
-declare namespace Express {
-  export interface Request {
-    user?: any;
-  }
-}
-
-// Define admin user interface
-export interface IUser {
-  _id: string;
-  name: string;
-  email: string;
-  password: string;
-  role: string;
-  lastLogin: Date;
-  loginAttempts: number;
-  lockUntil?: Date;
-  active: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-}
-```
-
-### Admin User Setup
-```typescript
-// In a separate setup script or as part of initial database seeding
-import User from '../models/User';
-import Profile from '../models/Profile';
-import bcrypt from 'bcryptjs';
-
-interface CreateAdminResult {
-  success: boolean;
-  message: string;
-}
-
-const createAdminUser = async (): Promise<CreateAdminResult> => {
-  try {
-    const adminExists = await User.findOne({ email: process.env.ADMIN_EMAIL });
-    
-    if (adminExists) {
-      return { success: false, message: 'Admin user already exists' };
-    }
-    
-    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || '', 10);
-    
-    const admin = await User.create({
-      name: 'MD Mahbub Alam',
-      email: process.env.ADMIN_EMAIL,
-      password: hashedPassword,
-      role: 'admin',
-      active: true
-    });
-    
-    await Profile.create({
-      user: admin._id,
-      bio: 'ML Researcher and Backend Engineer',
-      title: 'Computer Science Graduate',
-      // Other default profile values
-    });
-    
-    return { success: true, message: 'Admin user created successfully' };
-  } catch (error) {
-    return { 
-      success: false, 
-      message: `Error creating admin user: ${error instanceof Error ? error.message : String(error)}` 
-    };
-  }
-};
-```
-
-### Environment Variables for Admin
-```
-# Admin credentials
-ADMIN_EMAIL=your-email@example.com
-ADMIN_PASSWORD=your-secure-password
-```
-
-### Security Considerations for Single-User System
-- Use a very strong password
-- Implement IP whitelisting for admin routes
-- Use shorter JWT expiry times with auto-refresh
-- Implement automatic logout on inactivity
-- Store login session information
-
-## Enhanced Database Schema Design with TypeScript
-
-### User Schema (Modified for Single-User System)
-```typescript
-import mongoose, { Schema, Document, Model } from 'mongoose';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-
-export interface IUserDocument extends Document {
-  name: string;
-  email: string;
-  password: string;
-  role: string;
-  lastLogin: Date;
-  loginAttempts: number;
-  lockUntil?: Date;
-  createdAt: Date;
-  updatedAt: Date;
-  matchPassword(enteredPassword: string): Promise<boolean>;
-  getSignedJwtToken(): string;
-}
-
-const userSchema: Schema = new Schema({
-  name: {
-    type: String,
-    required: [true, 'Name is required'],
-    trim: true
-  },
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    unique: true,
-    lowercase: true,
-    trim: true,
-    validate: {
-      validator: function(v: string): boolean {
-        return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v);
-      },
-      message: (props: { value: string }) => `${props.value} is not a valid email!`
-    }
-  },
-  password: {
-    type: String,
-    required: [true, 'Password is required'],
-    minlength: [12, 'Password must be at least 12 characters long'], // Stronger for single admin
-    select: false 
-  },
-  role: {
-    type: String,
-    default: 'admin',
-    immutable: true // Cannot be changed once set
-  },
-  lastLogin: {
-    type: Date,
-    default: Date.now
-  },
-  loginAttempts: {
-    type: Number,
-    default: 0
-  },
-  lockUntil: {
-    type: Date
-  }
-}, { 
-  timestamps: true 
-});
-
-// Pre-save middleware to hash password
-userSchema.pre<IUserDocument>('save', async function(next) {
-  if (!this.isModified('password')) return next();
-  
-  try {
-    const salt = await bcrypt.genSalt(12); // Higher rounds for single-user system
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (error) {
-    next(error instanceof Error ? error : new Error('Password hashing error'));
-  }
-});
-
-// Method to compare password
-userSchema.methods.matchPassword = async function(enteredPassword: string): Promise<boolean> {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
-
-// Method to generate JWT token
-userSchema.methods.getSignedJwtToken = function(): string {
-  return jwt.sign(
-    { id: this._id }, 
-    process.env.JWT_SECRET || 'fallbacksecret', 
-    { expiresIn: process.env.JWT_EXPIRE || '1h' }
-  );
-};
-
-const User: Model<IUserDocument> = mongoose.model<IUserDocument>('User', userSchema);
-
-export default User;
-```
-
-### Profile Schema
-```typescript
-import mongoose, { Schema, Document, Model } from 'mongoose';
-
-export interface ISocialLinks {
-  github?: string;
-  linkedin?: string;
-  twitter?: string;
-  facebook?: string;
-  instagram?: string;
-  youtube?: string;
-  website?: string;
-  medium?: string;
-  stackoverflow?: string;
-}
-
-export interface ILanguage {
-  name: string;
-  proficiency: 'Basic' | 'Intermediate' | 'Fluent' | 'Native';
-}
-
-export interface ICertification {
-  name: string;
-  issuer: string;
-  date: Date;
-  link?: string;
-}
-
-export interface IProfileDocument extends Document {
-  user: mongoose.Types.ObjectId;
-  bio: string;
-  avatar: string;
-  coverImage: string;
-  title: string;
-  location?: {
-    city?: string;
-    country?: string;
-    coordinates?: number[];
-  };
-  about?: string;
-  skills: mongoose.Types.ObjectId[];
-  socialLinks: ISocialLinks;
-  resume?: string;
-  portfolioTheme: string;
-  featuredProjects: mongoose.Types.ObjectId[];
-  languages: ILanguage[];
-  interests: string[];
-  certifications: ICertification[];
-  metrics: {
-    profileViews: number;
-    downloadsResume: number;
-  };
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-const profileSchema: Schema = new Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-    unique: true
-  },
-  bio: {
-    type: String,
-    required: [true, 'Bio is required'],
-    trim: true,
-    maxlength: [500, 'Bio cannot exceed 500 characters']
-  },
-  avatar: {
-    type: String,
-    default: 'default-avatar.jpg'
-  },
-  coverImage: {
-    type: String,
-    default: 'default-cover.jpg'
-  },
-  title: {
-    type: String,
-    required: [true, 'Title is required'],
-    trim: true
-  },
-  location: {
-    city: String,
-    country: String,
-    coordinates: {
-      type: [Number], // [longitude, latitude]
-      index: '2dsphere'
-    }
-  },
-  about: {
-    type: String,
-    trim: true
-  },
-  skills: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Skill'
-  }],
-  socialLinks: {
-    github: String,
-    linkedin: String,
-    twitter: String,
-    facebook: String,
-    instagram: String,
-    youtube: String,
-    website: String,
-    medium: String,
-    stackoverflow: String
-  },
-  resume: {
-    type: String
-  },
-  portfolioTheme: {
-    type: String,
-    default: 'light'
-  },
-  featuredProjects: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project'
-  }],
-  languages: [{
-    name: String,
-    proficiency: {
-      type: String,
-      enum: ['Basic', 'Intermediate', 'Fluent', 'Native']
-    }
-  }],
-  interests: [String],
-  certifications: [{
-    name: String,
-    issuer: String,
-    date: Date,
-    link: String
-  }],
-  metrics: {
-    profileViews: {
-      type: Number,
-      default: 0
-    },
-    downloadsResume: {
-      type: Number,
-      default: 0
-    }
-  }
-}, { 
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
-});
-
-// Virtual fields to get related data
-profileSchema.virtual('experienceCount', {
-  ref: 'Experience',
-  localField: 'user',
-  foreignField: 'user',
-  count: true
-});
-
-profileSchema.virtual('projectCount', {
-  ref: 'Project',
-  localField: 'user',
-  foreignField: 'user',
-  count: true
-});
-
-profileSchema.virtual('blogCount', {
-  ref: 'Blog',
-  localField: 'user',
-  foreignField: 'author',
-  count: true
-});
-
-const Profile: Model<IProfileDocument> = mongoose.model<IProfileDocument>('Profile', profileSchema);
-
-export default Profile;
-```
-
-### Project Schema
-```typescript
-import mongoose, { Schema, Document, Model } from 'mongoose';
-import slugify from 'slugify';
-import shortid from 'shortid';
-
-export interface IProjectImage {
-  url: string;
-  caption?: string;
-  isPrimary: boolean;
-}
-
-export interface IProjectTeamMember {
-  name: string;
-  role?: string;
-  link?: string;
-}
-
-export interface IProjectVideo {
-  platform: 'YouTube' | 'Vimeo' | 'Other';
-  url: string;
-  title?: string;
-}
-
-export interface IProjectDocument extends Document {
-  user: mongoose.Types.ObjectId;
-  title: string;
-  slug: string;
-  description: {
-    short: string;
-    detailed: string;
-  };
-  images: IProjectImage[];
-  technologies: string[];
-  links: {
-    github?: string;
-    live?: string;
-    demo?: string;
-    documentation?: string;
-  };
-  featured: boolean;
-  category: 'Web Development' | 'Machine Learning' | 'Data Science' | 'Mobile App' | 'Research' | 'Game Development' | 'Other';
-  duration: {
-    startDate?: Date;
-    endDate?: Date;
-    ongoing: boolean;
-  };
-  team: IProjectTeamMember[];
-  achievements: string[];
-  metrics: {
-    views: number;
-    likes: number;
-  };
-  videos: IProjectVideo[];
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-const projectSchema: Schema = new Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  title: {
-    type: String,
-    required: [true, 'Project title is required'],
-    trim: true
-  },
-  slug: {
-    type: String,
-    unique: true
-  },
-  description: {
-    short: {
-      type: String,
-      required: [true, 'Short description is required'],
-      maxlength: [200, 'Short description cannot exceed 200 characters']
-    },
-    detailed: {
-      type: String,
-      required: [true, 'Detailed description is required']
-    }
-  },
-  images: [{
-    url: String,
-    caption: String,
-    isPrimary: {
-      type: Boolean,
-      default: false
-    }
-  }],
-  technologies: [{
-    type: String,
-    trim: true
-  }],
-  links: {
-    github: String,
-    live: String,
-    demo: String,
-    documentation: String
-  },
-  featured: {
-    type: Boolean,
-    default: false
-  },
-  category: {
-    type: String,
-    enum: ['Web Development', 'Machine Learning', 'Data Science', 'Mobile App', 'Research', 'Game Development', 'Other'],
-    required: true
-  },
-  duration: {
-    startDate: Date,
-    endDate: Date,
-    ongoing: {
-      type: Boolean,
-      default: false
-    }
-  },
-  team: [{
-    name: String,
-    role: String,
-    link: String
-  }],
-  achievements: [{
-    type: String
-  }],
-  metrics: {
-    views: {
-      type: Number,
-      default: 0
-    },
-    likes: {
-      type: Number,
-      default: 0
-    }
-  },
-  videos: [{
-    platform: {
-      type: String,
-      enum: ['YouTube', 'Vimeo', 'Other']
-    },
-    url: String,
-    title: String
-  }]
-}, {
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
-});
-
-// Generate slug before saving
-projectSchema.pre<IProjectDocument>('save', function(next) {
-  if (this.isModified('title')) {
-    this.slug = slugify(this.title, { lower: true }) + '-' + shortid.generate();
-  }
-  next();
-});
-
-const Project: Model<IProjectDocument> = mongoose.model<IProjectDocument>('Project', projectSchema);
-
-export default Project;
-```
-
-## Sample TypeScript Controller
-
-```typescript
-import { Request, Response } from 'express';
-import User from '../models/User';
-import { IUserDocument } from '../models/User';
-
-// Define extended request with user property
-interface AuthenticatedRequest extends Request {
-  user?: IUserDocument;
-}
-
-// @desc    Login user
-// @route   POST /api/auth/login
-// @access  Public
-export const login = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { email, password } = req.body;
-
-    // Validate email & password
-    if (!email || !password) {
-      res.status(400).json({
-        success: false,
-        message: 'Please provide email and password'
-      });
-      return;
-    }
-
-    // Check for user
-    const user = await User.findOne({ email }).select('+password');
-
-    if (!user) {
-      res.status(401).json({
-        success: false,
-        message: 'Invalid credentials'
-      });
-      return;
-    }
-
-    // Check if password matches
-    const isMatch = await user.matchPassword(password);
-
-    if (!isMatch) {
-      res.status(401).json({
-        success: false,
-        message: 'Invalid credentials'
-      });
-      return;
-    }
-
-    // Update last login
-    user.lastLogin = new Date();
-    await user.save();
-
-    // Create token
-    const token = user.getSignedJwtToken();
-
-    res.status(200).json({
-      success: true,
-      token
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error instanceof Error ? error.message : 'Server error'
-    });
-  }
-};
-
-// @desc    Get current logged in user
-// @route   GET /api/auth/me
-// @access  Private
-export const getMe = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-  try {
-    const userId = req.user?._id;
-    
-    if (!userId) {
-      res.status(401).json({ 
-        success: false, 
-        message: 'Not authorized' 
-      });
-      return;
-    }
-    
-    const user = await User.findById(userId);
-
-    res.status(200).json({
-      success: true,
-      data: user
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error instanceof Error ? error.message : 'Server error'
-    });
-  }
-};
-```
-
-## Update package.json Scripts
-
-```json
-"scripts": {
-  "start": "node dist/server.js",
-  "build": "tsc",
-  "dev": "nodemon --exec ts-node src/server.ts",
-  "test": "jest",
-  "lint": "eslint . --ext .ts",
-  "lint:fix": "eslint . --ext .ts --fix"
-}
-```
-
-## Next Steps
-
-1. Implement the controllers and routes for each endpoint using TypeScript
-2. Set up the single-user authentication system with secure login
-3. Create a dashboard initialization script to create the admin user on first run
-4. Create file upload functionality for images and documents
-5. Implement GitHub API integration for automatic repository syncing
-6. Set up newsletter sending functionality with templates
-7. Create a site configuration management system
-8. Implement error handling and data validation using TypeScript interfaces
-9. Write tests for your API endpoints using Jest and TypeScript
-10. Deploy to a hosting service (Heroku, DigitalOcean, etc.)
-11. Document your API for future frontend integration
-
-## Future Plans for Frontend
-
-For the frontend, consider:
-- React.js with TypeScript
-- Redux for state management
-- Styled-components or Tailwind CSS for styling
-- Responsive design for all devices
-- Animation libraries for interactive elements
-- SEO optimization
+## Performance Considerations
+
+### 3D Elements
+- **Conditional rendering** of 3D elements based on viewport visibility
+- **Level-of-detail adjustments** for different devices
+- **Optimized geometries** with appropriate polygon counts
+- **Texture compression** for faster loading
+- **Lazy loading** for 3D models and heavy assets
+
+### Code Splitting
+- **React.lazy()** and Suspense for component code-splitting
+- **Dynamic imports** for route-based code splitting
+- **Chunked loading** of large dependencies
+
+### General Optimizations
+- **Progressive loading** indicators for content and 3D scenes
+- **Image optimization** with responsive sizing and formats
+- **Memoization** of expensive computations with useMemo and useCallback
+- **Virtual rendering** for long lists with react-window
 
 ## Deployment
 
-To deploy your backend:
-1. Set up environment variables on the hosting platform
-2. Configure MongoDB Atlas for cloud database hosting
-3. Set up CI/CD pipeline for automatic deployments
-4. Configure proper CORS to allow only your frontend domain
-5. Implement rate limiting and security best practices
+### Vercel Deployment
 
-## Analytics and Metrics
+1. Connect your GitHub repository to Vercel
+2. Configure build settings:
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+3. Set environment variables if needed
+4. Deploy and get your live URL
 
-To track engagement and performance of your portfolio:
+### Netlify Deployment
 
-1. Implement analytics tracking for:
-   - Page visits
-   - Blog post engagement
-   - Project interactions
-   - Document downloads
-   - Contact form submissions
-   
-2. Create an admin dashboard to visualize:
-   - Visitor demographics
-   - Popular content
-   - Traffic sources
-   - Engagement metrics
-   - Conversion rates
+1. Connect your GitHub repository to Netlify
+2. Configure build settings:
+   - Build Command: `npm run build`
+   - Publish Directory: `dist`
+3. Set environment variables if needed
+4. Deploy and get your live URL
 
-3. Set up email notifications for:
-   - New contact form submissions
-   - Comment moderation alerts
-   - Important engagement milestones
+## Future Enhancements
 
-## Security Best Practices
+- **Blog CMS Integration** with headless CMS like Contentful or Sanity
+- **Advanced 3D Interactions** with physics engines
+- **WebGL Shaders** for custom visual effects
+- **Internationalization** for multiple language support
+- **Server-side rendering** for improved SEO
+- **Advanced animations** with GSAP for complex sequences
+- **Integration with GitHub API** for automated project updates
 
-1. Implement robust authentication with JWT
-2. Set up rate limiting for all API endpoints
-3. Use CORS restrictions for production
-4. Sanitize all user inputs
-5. Implement proper error handling that doesn't expose sensitive information
-6. Set secure HTTP headers with Helmet
-7. Encrypt sensitive data
-8. Use environment variables for all secrets
-9. Implement request validation for all endpoints
-10. Set up logging for security events
+## Design Philosophy
 
-## DevOps and CI/CD
+The portfolio combines professional sophistication with interactive elements that showcase technical expertise. The 3D elements and particle simulations serve not just as visual enhancements but as metaphors for complex systems and backend architecture, reflecting work in software engineering and AI/ML research.
 
-1. Set up GitHub Actions workflow for:
-   - Running tests
-   - Linting code
-   - Building production assets
-   - Deploying to staging/production
+Key design principles include:
+- **Progressive disclosure** of information
+- **Visual hierarchy** to guide user attention
+- **Interactive elements** that invite exploration
+- **Dynamic feedback** on user actions
+- **Balance between aesthetics and performance**
 
-2. Implement Docker containerization:
-   - Create optimized Docker images
-   - Set up docker-compose for local development
-   - Configure production-ready container orchestration
+## Troubleshooting
 
-3. Configure monitoring and alerting:
-   - Set up application performance monitoring
-   - Configure health check endpoints
-   - Implement error tracking and reporting
-   - Set up notification systems for critical issues
+### Common Issues
+
+1. **3D elements not rendering**
+   - Ensure WebGL is enabled in your browser
+   - Check for console errors related to Three.js
+   - Verify that 3D model paths are correct
+
+2. **Particle effects causing performance issues**
+   - Reduce particle count in ParticleBackground.tsx
+   - Disable particles on lower-end devices
+
+3. **Build errors**
+   - Clear node_modules and reinstall dependencies
+   - Check TypeScript errors in the console
+   - Verify import paths for case sensitivity
+
+## Resources
+
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [Three.js Documentation](https://threejs.org/docs/)
+- [React Three Fiber Documentation](https://docs.pmnd.rs/react-three-fiber/)
+- [Drei Documentation](https://github.com/pmndrs/drei)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [React tsParticles Documentation](https://particles.js.org/)
+- [Framer Motion Documentation](https://www.framer.com/motion/)
+- [Vite Documentation](https://vitejs.dev/guide/)
+
+## License
+
+MIT
+
+---
+
+© 2023 Mahbubul Alam. All rights reserved.
