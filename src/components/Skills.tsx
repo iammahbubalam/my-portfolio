@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import {
   FaJava,
   FaDocker,
@@ -10,13 +10,13 @@ import {
   FaPython,
   FaBrain,
   FaNetworkWired,
-  FaRobot
+  FaRobot,
 } from "react-icons/fa";
 import {
   SiTensorflow,
-  SiPytorch, 
+  SiPytorch,
   SiKeras,
-  SiScikitlearn,  
+  SiScikitlearn,
   SiOpencv,
   SiSpringboot,
   SiGo,
@@ -34,11 +34,11 @@ import {
 import { TbGraph, TbApi, TbBrandOpenai } from "react-icons/tb";
 
 const Skills = () => {
-  // Animation for sections
   const [isVisible, setIsVisible] = useState(false);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   // Skills data - Machine Learning / Deep Learning focused
-  const mlDlSkills = [
+  const mlDlSkills = useMemo(() => [
     {
       name: "PyTorch",
       icon: SiPytorch,
@@ -94,10 +94,10 @@ const Skills = () => {
       icon: FaPython,
       description: "Primary language for ML research and development",
     },
-  ];
+  ], []);
 
   // Backend Development Skills
-  const backendSkills = [
+  const backendSkills = useMemo(() => [
     {
       name: "Java",
       icon: FaJava,
@@ -158,10 +158,10 @@ const Skills = () => {
       icon: SiTypescript,
       description: "Typed superset of JavaScript",
     },
-  ];
+  ], []);
 
   // Infrastructure & DevOps Skills
-  const infrastructureSkills = [
+  const infrastructureSkills = useMemo(() => [
     {
       name: "Git",
       icon: FaGitAlt,
@@ -202,7 +202,7 @@ const Skills = () => {
       icon: FaNetworkWired,
       description: "Designing scalable cloud infrastructures",
     },
-  ];
+  ], []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -220,6 +220,52 @@ const Skills = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Add 3D tilt effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent, card: HTMLDivElement) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = (centerY - y) / 20;
+      const rotateY = (x - centerX) / 20;
+
+      card.style.transform = `translateZ(20px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    };
+
+    const handleMouseLeave = (card: HTMLDivElement) => {
+      card.style.transform = `translateZ(0) rotateX(0) rotateY(0)`;
+    };
+
+    cardsRef.current.forEach((card) => {
+      if (card) {
+        card.addEventListener("mousemove", (e) => handleMouseMove(e, card));
+        card.addEventListener("mouseleave", () => handleMouseLeave(card));
+      }
+    });
+
+    return () => {
+      cardsRef.current.forEach((card) => {
+        if (card) {
+          card.removeEventListener("mousemove", (e) =>
+            handleMouseMove(e as MouseEvent, card)
+          );
+          card.removeEventListener("mouseleave", () => handleMouseLeave(card));
+        }
+      });
+    };
+  }, [isVisible]);
+
+  // Reset refs array when skills data changes
+  useEffect(() => {
+    cardsRef.current = cardsRef.current.slice(
+      0,
+      mlDlSkills.length + backendSkills.length + infrastructureSkills.length
+    );
+  }, [mlDlSkills, backendSkills, infrastructureSkills]);
+
   return (
     <section
       id="skills"
@@ -232,7 +278,14 @@ const Skills = () => {
           <h3 className="category-title">Machine Learning & Deep Learning</h3>
           <div className="skill-cards">
             {mlDlSkills.map((skill, index) => (
-              <div key={index} className="skill-card">
+              <div
+                key={index}
+                className="skill-card"
+                ref={(el) => {
+                  cardsRef.current[index] = el;
+                }}
+                data-tilt
+              >
                 <div className="skill-icon">
                   <skill.icon />
                 </div>
@@ -247,7 +300,14 @@ const Skills = () => {
           <h3 className="category-title">Backend Development</h3>
           <div className="skill-cards">
             {backendSkills.map((skill, index) => (
-              <div key={index} className="skill-card">
+              <div
+                key={index}
+                className="skill-card"
+                ref={(el) => {
+                  cardsRef.current[mlDlSkills.length + index] = el;
+                }}
+                data-tilt
+              >
                 <div className="skill-icon">
                   <skill.icon />
                 </div>
@@ -262,7 +322,16 @@ const Skills = () => {
           <h3 className="category-title">Infrastructure & DevOps</h3>
           <div className="skill-cards">
             {infrastructureSkills.map((skill, index) => (
-              <div key={index} className="skill-card">
+              <div
+                key={index}
+                className="skill-card"
+                ref={(el) => {
+                  cardsRef.current[
+                    mlDlSkills.length + backendSkills.length + index
+                  ] = el;
+                }}
+                data-tilt
+              >
                 <div className="skill-icon">
                   <skill.icon />
                 </div>
