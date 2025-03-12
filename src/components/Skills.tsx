@@ -1,48 +1,122 @@
 import { useEffect, useState } from "react";
 import {
-  FaJs,
-  FaReact,
-  FaHtml5,
-  FaCss3Alt,
-  FaNodeJs,
+  FaJava,
   FaDocker,
   FaGitAlt,
   FaGithub,
-  FaCode,
-  FaServer,
   FaDatabase,
+  FaReact,
+  FaNodeJs,
+  FaPython,
+  FaBrain,
+  FaNetworkWired,
+  FaRobot
 } from "react-icons/fa";
 import {
-  SiTypescript,
-  SiNextdotjs,
-  SiTailwindcss,
+  SiTensorflow,
+  SiPytorch, 
+  SiKeras,
+  SiScikitlearn,  
+  SiOpencv,
+  SiSpringboot,
+  SiGo,
+  SiExpress,
   SiMongodb,
   SiPostgresql,
   SiPrisma,
-  SiExpress,
-  SiMongoose,
-  SiFirebase,
-  SiVercel,
-  SiRender,
-  SiRedux,
-  SiJsonwebtokens,
+  SiAmazonaws,
+  SiLinux,
+  SiKubernetes,
+  SiJavascript,
+  SiTypescript,
+  SiPandas,
 } from "react-icons/si";
+import { TbGraph, TbApi, TbBrandOpenai } from "react-icons/tb";
 
 const Skills = () => {
   // Animation for sections
   const [isVisible, setIsVisible] = useState(false);
 
-  // Skills data
-  const frontendSkills = [
+  // Skills data - Machine Learning / Deep Learning focused
+  const mlDlSkills = [
     {
-      name: "TypeScript",
-      icon: SiTypescript,
-      description: "Strongly-typed JavaScript for reliable applications",
+      name: "PyTorch",
+      icon: SiPytorch,
+      description: "Deep learning framework for research and production",
+    },
+    {
+      name: "TensorFlow",
+      icon: SiTensorflow,
+      description: "End-to-end machine learning platform",
+    },
+    {
+      name: "Keras",
+      icon: SiKeras,
+      description: "High-level neural networks API",
+    },
+    {
+      name: "LangChain",
+      icon: FaRobot, // Replaced with appropriate icon
+      description: "Building applications with LLMs through composability",
+    },
+    {
+      name: "LangGraph",
+      icon: TbGraph,
+      description: "Agent workflows and reasoning frameworks",
+    },
+    {
+      name: "NLP & LLMs",
+      icon: FaBrain,
+      description: "Natural language processing and large language models",
+    },
+    {
+      name: "NumPy & Pandas",
+      icon: SiPandas,
+      description: "Scientific computing and data manipulation",
+    },
+    {
+      name: "Scikit-learn",
+      icon: SiScikitlearn,
+      description: "Machine learning algorithms and tools",
+    },
+    {
+      name: "OpenCV",
+      icon: SiOpencv,
+      description: "Computer vision and image processing",
+    },
+    {
+      name: "Agentic AI",
+      icon: TbBrandOpenai,
+      description: "Building intelligent autonomous agents",
+    },
+    {
+      name: "Python",
+      icon: FaPython,
+      description: "Primary language for ML research and development",
+    },
+  ];
+
+  // Backend Development Skills
+  const backendSkills = [
+    {
+      name: "Java",
+      icon: FaJava,
+      description: "Enterprise-grade backend applications",
+    },
+    {
+      name: "Spring Boot",
+      icon: SiSpringboot,
+      description: "Java-based framework for microservices",
+    },
+    {
+      name: "Go",
+      icon: SiGo,
+      description: "Efficient, concurrent programming language",
     },
     {
       name: "JavaScript",
-      icon: FaJs,
-      description: "Core language for web development",
+      icon: SiJavascript,
+      description: "Versatile language for web development",
     },
     {
       name: "React",
@@ -50,43 +124,14 @@ const Skills = () => {
       description: "Library for building user interfaces",
     },
     {
-      name: "Redux",
-      icon: SiRedux,
-      description: "Predictable state management for JavaScript apps",
-    },
-    {
-      name: "Next.js",
-      icon: SiNextdotjs,
-      description: "React framework for production",
-    },
-    {
-      name: "TailwindCSS",
-      icon: SiTailwindcss,
-      description: "Utility-first CSS framework",
-    },
-    {
-      name: "HTML5",
-      icon: FaHtml5,
-      description: "Markup language for web pages",
-    },
-    { name: "CSS3", icon: FaCss3Alt, description: "Styling web pages" },
-  ];
-
-  const backendSkills = [
-    {
       name: "Node.js",
       icon: FaNodeJs,
       description: "JavaScript runtime for server-side applications",
     },
     {
-      name: "Express.js",
+      name: "Express",
       icon: SiExpress,
-      description: "Web application framework for Node.js",
-    },
-    {
-      name: "JWT",
-      icon: SiJsonwebtokens,
-      description: "JSON Web Tokens for secure authentication",
+      description: "Web framework for Node.js",
     },
     {
       name: "MongoDB",
@@ -94,56 +139,68 @@ const Skills = () => {
       description: "NoSQL database for modern applications",
     },
     {
-      name: "Mongoose",
-      icon: SiMongoose,
-      description: "MongoDB object modeling for Node.js",
-    },
-    {
       name: "PostgreSQL",
       icon: SiPostgresql,
-      description: "Powerful, open source object-relational database",
+      description: "Advanced relational database system",
     },
     {
-      name: "Prisma",
+      name: "ORM",
       icon: SiPrisma,
-      description: "Next-generation ORM for Node.js and TypeScript",
+      description: "Object-relational mapping tools",
+    },
+    {
+      name: "RESTful API",
+      icon: TbApi,
+      description: "API design and implementation",
+    },
+    {
+      name: "TypeScript",
+      icon: SiTypescript,
+      description: "Typed superset of JavaScript",
     },
   ];
 
-  const devOpsSkills = [
-    { name: "Git", icon: FaGitAlt, description: "Version control system" },
-    { name: "GitHub", icon: FaGithub, description: "Development platform" },
+  // Infrastructure & DevOps Skills
+  const infrastructureSkills = [
+    {
+      name: "Git",
+      icon: FaGitAlt,
+      description: "Version control system",
+    },
+    {
+      name: "GitHub",
+      icon: FaGithub,
+      description: "Collaboration and CI/CD platform",
+    },
+    {
+      name: "AWS",
+      icon: SiAmazonaws,
+      description: "Cloud computing services",
+    },
+    {
+      name: "Linux",
+      icon: SiLinux,
+      description: "Operating system for servers and development",
+    },
     {
       name: "Docker",
       icon: FaDocker,
-      description:
-        "Platform for developing, shipping, and running applications",
+      description: "Container platform for consistent environments",
     },
     {
-      name: "Firebase",
-      icon: SiFirebase,
-      description: "Google's app development platform",
-    },
-    {
-      name: "Vercel",
-      icon: SiVercel,
-      description: "Platform for frontend frameworks and static sites",
-    },
-    {
-      name: "Render",
-      icon: SiRender,
-      description: "Unified cloud for web services and databases",
-    },
-    { name: "VS Code", icon: FaCode, description: "Source-code editor" },
-    {
-      name: "RESTful API",
-      icon: FaServer,
-      description: "Architecture for API design",
+      name: "Kubernetes",
+      icon: SiKubernetes,
+      description: "Container orchestration for scalable deployments",
     },
     {
       name: "Database Design",
       icon: FaDatabase,
-      description: "Creating efficient database structures",
+      description: "Creating efficient data storage solutions",
+    },
+    {
+      name: "Cloud Architecture",
+      icon: FaNetworkWired,
+      description: "Designing scalable cloud infrastructures",
     },
   ];
 
@@ -172,9 +229,9 @@ const Skills = () => {
         <h2 className="section-title">My Skills</h2>
 
         <div className="skill-category">
-          <h3 className="category-title">Frontend Development</h3>
+          <h3 className="category-title">Machine Learning & Deep Learning</h3>
           <div className="skill-cards">
-            {frontendSkills.map((skill, index) => (
+            {mlDlSkills.map((skill, index) => (
               <div key={index} className="skill-card">
                 <div className="skill-icon">
                   <skill.icon />
@@ -202,9 +259,9 @@ const Skills = () => {
         </div>
 
         <div className="skill-category">
-          <h3 className="category-title">DevOps & Tools</h3>
+          <h3 className="category-title">Infrastructure & DevOps</h3>
           <div className="skill-cards">
-            {devOpsSkills.map((skill, index) => (
+            {infrastructureSkills.map((skill, index) => (
               <div key={index} className="skill-card">
                 <div className="skill-icon">
                   <skill.icon />
