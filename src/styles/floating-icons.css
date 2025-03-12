@@ -44,6 +44,51 @@
 .icon23 { top: 85%; left: 48%; font-size: 40px; } /* Increased from 36px */
 .icon24 { top: 82%; left: 65%; font-size: 44px; } /* Increased from 40px */
 
+/* Media queries for mobile responsiveness */
+@media screen and (max-width: 768px) {
+  /* Reduce size of all floating icons on mobile */
+  .floating-icon {
+    font-size: 28px !important; /* Override all individual icon font sizes */
+  }
+  
+  /* Hide less important icons on mobile */
+  .icon3, .icon4, .icon6, .icon9,  .icon13, .icon16, .icon19, .icon20, 
+  .icon22, .icon23, .icon24 {
+    display: none;
+  }
+  
+  /* Reposition the remaining important icons for better mobile display */
+  .icon1 { top: 15%; left: 10%; } /* Java */
+  .icon2 { top: 25%; left: 85%; } /* Spring Boot */
+  .icon5 { top: 35%; left: 30%; } /* PostgreSQL */
+  .icon7 { top: 75%; left: 40%; } /* TensorFlow */
+  .icon8 { top: 20%; left: 60%; } /* PyTorch */
+  .icon10 { top: 10%; left: 40%; } /* OpenCV */
+  .icon11 { top: 5%; left: 50%; } /* OpenAI */
+  .icon18 { top: 80%; left: 32%; } /* Docker */
+  .icon21 { top: 42%; left: 12%; } /* React */
+}
+
+/* Even smaller screens */
+@media screen and (max-width: 480px) {
+  .floating-icon {
+    font-size: 24px !important; /* Even smaller on very small screens */
+  }
+  
+  /* Further reduce visible icons on very small screens */
+  .icon5, .icon18, .icon21 {
+    display: none;
+  }
+  
+  /* Only show the most relevant ML and Backend icons */
+  .icon1 { top: 15%; left: 15%; } /* Java */
+  .icon2 { top: 25%; left: 80%; } /* Spring Boot */
+  .icon7 { top: 70%; left: 65%; } /* TensorFlow */
+  .icon8 { top: 25%; left: 50%; } /* PyTorch */
+  .icon10 { top: 40%; left: 20%; } /* OpenCV */
+  .icon11 { top: 60%; left: 50%; } /* OpenAI */
+}
+
 /* Floating animations */
 @keyframes float1 {
   0% { transform: translate(0, 0) rotate(0deg); }

@@ -39,12 +39,12 @@ const Contact = () => {
             <div className="contact-methods">
               <div className="contact-method">
                 <MdEmail className="contact-icon" />
-                <span>likhonsarker793@gmail.com</span>
+                <span>malam212082@bscse.uiu.ac.bd</span>
               </div>
 
               <div className="social-links">
                 <a
-                  href="https://github.com/Likhon22"
+                  href="https://github.com/iammahbubalam"
                   target="_blank"
                   className="social-link"
                   aria-label="GitHub"
@@ -52,7 +52,7 @@ const Contact = () => {
                   <FaGithub />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/likhon-sarker-78395a336"
+                  href="https://www.linkedin.com/in/iammahbubalam"
                   target="_blank"
                   className="social-link"
                   aria-label="LinkedIn"
@@ -61,7 +61,7 @@ const Contact = () => {
                 </a>
 
                 <a
-                  href="https://www.facebook.com/likhana.sarakara.169778"
+                  href="https://www.facebook.com/iammahbubalam"
                   target="_blank"
                   className="social-link"
                   aria-label="Facebook"
@@ -69,7 +69,7 @@ const Contact = () => {
                   <FaFacebook />
                 </a>
                 <a
-                  href="https://www.instagram.com/likhon_sarker6404"
+                  href="https://www.instagram.com/iamtonmoy"
                   target="_blank"
                   className="social-link"
                   aria-label="Instagram"
