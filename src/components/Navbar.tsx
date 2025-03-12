@@ -28,9 +28,9 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-      {/* Enhanced logo with icon */}
-      <h1 className="logo">
-        <FaCode className="logo-icon" /> Likhon Sarker
+      {/* Enhanced logo with icon and gradient class */}
+      <h1 className="logo logo-gradient">
+        <FaCode className="logo-icon" /> Md. Mahbub Alam
       </h1>
       <div className="nav-links">
         <a

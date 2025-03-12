@@ -6,19 +6,19 @@
 }
 
 :root {
-  --primary-color: #2986cc;
-  --accent-color: #3982ce;
-  --dark-bg: #000000;
-  --card-bg: #121212;
-  --darker-bg: #050505;
+  --primary-color: #0077B6; /* Deep blue - represents trust, stability, and intelligence */
+  --accent-color: #00B4D8; /* Bright teal - represents innovation and technology */
+  --dark-bg: linear-gradient(to bottom right, #05192D, #0C2D48, #05192D); /* Deep navy gradient */
+  --card-bg: #0F3049; /* Slightly lighter navy blue for cards */
+  --darker-bg: #031525; /* Very dark navy blue for contrast */
   --text-light: #ffffff;
-  --text-muted: #cccccc;
+  --text-muted: #E6F0F3; /* Light blue-tinted off-white for better contrast */
   --transition: all 0.3s ease;
 }
 
 body {
   font-family: "Inter", "Poppins", sans-serif;
-  background-color: var(--dark-bg);
+  background: var(--dark-bg); /* Changed to use the gradient */
   color: var(--text-light);
   line-height: 1.6;
   overflow-x: hidden;
@@ -141,42 +141,56 @@ p {
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.15); /* Much more transparent */
-  background-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.1)
-  );
-  backdrop-filter: blur(4px); /* Reduced blur to see particles better */
-  -webkit-backdrop-filter: blur(4px);
+  background-color: transparent; /* Changed to fully transparent */
+  background-image: none; /* Removed gradient */
+  backdrop-filter: none; /* Removed blur when at top */
+  -webkit-backdrop-filter: none; /* Removed blur when at top */
   transition: var(--transition);
-  border-bottom: 1px solid rgba(41, 134, 204, 0.15);
+  border-bottom: none; /* Removed border completely */
 }
 
 .navbar.scrolled {
   padding: 1rem 5%;
-  background-color: rgba(0, 0, 0, 0.3); /* Still transparent when scrolled */
+  background-color: rgba(5, 25, 45, 0.85); /* Professional dark blue */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(5, 25, 45, 0.95),
+    rgba(5, 25, 45, 0.85)
+  );
+  backdrop-filter: blur(8px); /* Added stronger blur when scrolled */
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(41, 134, 204, 0.15);
   border-bottom: 1px solid rgba(41, 134, 204, 0.3);
 }
 
+/* Updated logo styles with navy blue gradient */
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-color);
   position: relative;
-  z-index: 101;
-  text-shadow: 0 0 10px rgba(41, 134, 204, 0.6); /* Enhanced glow for better visibility */
+  z-index: 100;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: var(--primary-color);
+  text-shadow: 0 0 10px rgba(41, 134, 204, 0.6);
+}
+
+/* Adding the navy blue gradient class */
+.logo-gradient {
+  background-image: linear-gradient(135deg, #0077B6, #00B4D8, #48CAE4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 0 10px rgba(0, 119, 182, 0.6));
 }
 
 .logo-icon {
-  color: var(--primary-color);
+  color: #00B4D8; /* Bright teal to stand out */
   font-size: 1.2rem;
   animation: pulse 2s infinite;
-  filter: drop-shadow(0 0 5px rgba(41, 134, 204, 0.7)); /* Add glow to icon */
+  filter: drop-shadow(0 0 5px rgba(30, 58, 138, 0.8));
 }
 
 @keyframes pulse {
@@ -746,7 +760,7 @@ p {
 /* About section - Fixing shaking effects */
 .about-section {
   padding: 6rem 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: transparent; /* Changed to fully transparent */
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -1230,7 +1244,7 @@ p {
 /* Skills section - Updated for particle visibility */
 .skills-section {
   padding: 6rem 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Changed from solid to semi-transparent */
+  background: transparent; /* Changed to fully transparent */
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease, transform 1s ease;
@@ -1263,7 +1277,7 @@ p {
 }
 
 .skill-card {
-  background-color: rgba(18, 18, 18, 0.9); /* Slight transparency */
+  background-color: rgba(15, 48, 73, 0.9); /* Professional blue */
   backdrop-filter: blur(5px); /* Blur effect behind cards */
   -webkit-backdrop-filter: blur(5px);
   border-radius: 8px;
@@ -1389,7 +1403,7 @@ p {
 /* Projects section */
 .projects-section {
   padding: 6rem 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: transparent; /* Changed to fully transparent */
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease, transform 1s ease;
@@ -1518,7 +1532,7 @@ p {
 /* Contact section - Updated for particle visibility */
 .contact-section {
   padding: 6rem 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Changed from solid to semi-transparent */
+  background: transparent; /* Changed to fully transparent */
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease, transform 1s ease;
@@ -1643,7 +1657,7 @@ p {
 /* Footer - Updated for particle visibility */
 .footer {
   padding: 2rem 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Changed to transparent background */
+  background: transparent; /* Changed to fully transparent */
   text-align: center;
   color: var(--text-muted);
   font-size: 0.9rem;

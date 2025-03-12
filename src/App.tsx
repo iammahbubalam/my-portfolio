@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <div className="portfolio">
-      {/* Particles Background - Fixed to cover the entire page */}
+      {/* Updated Particles Background with Professional ML/Backend colors */}
       <div className="particles-container">
         <Particles
           id="tsparticles"
@@ -27,8 +27,12 @@ const App = () => {
           options={{
             background: {
               color: {
-                value: "#000000",
+                value: "#05192D", /* Deep navy - professional */
               },
+              image: "linear-gradient(to bottom right, #05192D, #0C2D48, #05192D)", /* Professional gradient */
+              position: "50% 50%",
+              repeat: "no-repeat",
+              size: "cover",
             },
             fpsLimit: 60,
             interactivity: {
@@ -55,10 +59,10 @@ const App = () => {
             },
             particles: {
               color: {
-                value: "#2986cc",
+                value: "#00B4D8", /* Teal for particles */
               },
               links: {
-                color: "#3982CE",
+                color: "#0077B6", /* Deep blue for links */
                 distance: 150,
                 enable: true,
                 opacity: 0.5,
@@ -100,7 +104,7 @@ const App = () => {
       <div className="main-content">
         <Navbar />
         <Hero />
-        <About /> {/* Re-enabled About section with new implementation */}
+        <About /> 
         <Skills />
         <Projects />
         <Contact />
