@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaCode, FaLaptopCode, FaBookOpen } from "react-icons/fa";
+import { FaBrain, FaServer, FaDatabase, FaCode, FaLayerGroup, FaNetworkWired } from "react-icons/fa";
 
 import me from "../assets/me.jpeg";
 const About = () => {
@@ -30,137 +30,168 @@ const About = () => {
         <h2 className="section-title">About Me</h2>
 
         <div className="about-grid">
-          {/* Left side - Simple image without animations */}
+          {/* Left side - Image and highlights */}
           <div className="about-image-wrapper">
-            <img src={me} alt="Likhon Sarker" className="about-image" />
+            <img src={me} alt="Md. Mahbub Alam" className="about-image" />
 
-            {/* Professional highlights - No animations */}
+            {/* Balanced highlights box for both ML Research and Backend Engineering */}
             <div className="highlights-box">
-              <h3>Professional Focus</h3>
+              <h3>Dual Expertise</h3>
 
               <div className="highlight-items">
+                {/* ML Research Section */}
                 <div className="highlight-item">
-                  <div className="highlight-icon code-icon">
-                    <FaCode />
+                  <div className="highlight-icon ml-icon">
+                    <FaBrain />
                   </div>
                   <div>
-                    <h4>Web Development</h4>
-                    <p>Building modern web applications</p>
+                    <h4>Advanced AI Research</h4>
+                    <p>NLP, LLMs & Image Generation</p>
                   </div>
                 </div>
 
+                {/* Backend Engineering Section */}
                 <div className="highlight-item">
-                  <div className="highlight-icon laptop-icon">
-                    <FaLaptopCode />
+                  <div className="highlight-icon backend-icon">
+                    <FaLayerGroup />
                   </div>
                   <div>
-                    <h4>Full Stack Solutions</h4>
-                    <p>End-to-end application development</p>
+                    <h4>Robust Backend Systems</h4>
+                    <p>Scalable distributed architecture</p>
                   </div>
                 </div>
 
+                {/* Integration of Both */}
                 <div className="highlight-item">
-                  <div className="highlight-icon book-icon">
-                    <FaBookOpen />
+                  <div className="highlight-icon integration-icon">
+                    <FaNetworkWired />
                   </div>
                   <div>
-                    <h4>Continuous Learning</h4>
-                    <p>Staying current with industry trends</p>
+                    <h4>AI-Powered Systems</h4>
+                    <p>Bridging research and production</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right side - About content */}
+          {/* Right side - Balanced content for ML Research & Backend */}
           <div className="about-content">
             <h3 className="about-subtitle">
-              Full Stack Developer & Problem Solver
+              Machine Learning Researcher & Backend Engineer
             </h3>
 
             <p className="about-text">
-              I'm a Full Stack Developer with expertise in modern web
-              technologies including TypeScript, React, and Next.js. I focus on
-              creating robust, scalable, and user-friendly applications that
-              address real-world business needs.
+              I work at the intersection of cutting-edge ML research and scalable backend engineering. 
+              On the research side, I specialize in transformer architectures, large language models, 
+              and generative AI for both text and images. As a backend engineer, I design robust 
+              distributed systems, microservices, and data pipelines that can handle enterprise-scale workloads.
             </p>
 
             <p className="about-text">
-              With a solid foundation in both frontend and backend development,
-              I bring ideas to life with clean, maintainable code and intuitive
-              user interfaces. My approach combines technical excellence with a
-              keen eye for user experience.
+              My dual expertise allows me to bridge the gap between theoretical advancements and 
+              production-ready implementations. I develop high-performance ML pipelines and APIs 
+              that make complex AI capabilities accessible through well-designed backends. 
+              This combination of skills enables me to build complete, end-to-end AI systems 
+              that are both innovative and production-ready.
+            </p>
+            
+            <p className="about-text">
+              I'm equally passionate about pushing boundaries in ML research—exploring techniques 
+              like parameter-efficient fine-tuning and multimodal learning—and creating elegant 
+              backend solutions using microservice architecture, message queues, and distributed 
+              computing frameworks that can reliably serve these advanced models at scale.
             </p>
 
-            {/* Skills overview - No animations */}
+            {/* Skills overview - Balanced between ML Research and Backend */}
             <div className="skills-overview">
               <h3>Core Competencies</h3>
 
               <div className="competency-bars">
+                {/* ML Research Competencies */}
                 <div className="competency-item">
                   <div className="competency-header">
-                    <span>Frontend Development</span>
+                    <span>NLP & Large Language Models</span>
+                    <span className="competency-level">Expert</span>
+                  </div>
+                  <div className="competency-bar">
+                    <div
+                      className="competency-fill"
+                      style={{ width: "95%" }}
+                    ></div>
+                  </div>
+                </div>
+
+                {/* Backend Engineering Competencies */}
+                <div className="competency-item">
+                  <div className="competency-header">
+                    <span>Backend Architecture</span>
+                    <span className="competency-level">Expert</span>
+                  </div>
+                  <div className="competency-bar">
+                    <div
+                      className="competency-fill"
+                      style={{ width: "95%" }}
+                    ></div>
+                  </div>
+                </div>
+
+                {/* More ML Research */}
+                <div className="competency-item">
+                  <div className="competency-header">
+                    <span>Image Generation & Multimodal AI</span>
                     <span className="competency-level">Advanced</span>
                   </div>
                   <div className="competency-bar">
                     <div
                       className="competency-fill"
-                      style={{ width: "85%" }}
+                      style={{ width: "88%" }}
                     ></div>
                   </div>
                 </div>
 
+                {/* More Backend */}
                 <div className="competency-item">
                   <div className="competency-header">
-                    <span>Backend Development</span>
-                    <span className="competency-level">Proficient</span>
-                  </div>
-                  <div className="competency-bar">
-                    <div
-                      className="competency-fill"
-                      style={{ width: "75%" }}
-                    ></div>
-                  </div>
-                </div>
-
-                <div className="competency-item">
-                  <div className="competency-header">
-                    <span>Database Management</span>
-                    <span className="competency-level">Skilled</span>
-                  </div>
-                  <div className="competency-bar">
-                    <div
-                      className="competency-fill"
-                      style={{ width: "70%" }}
-                    ></div>
-                  </div>
-                </div>
-
-                <div className="competency-item">
-                  <div className="competency-header">
-                    <span>UI/UX Implementation</span>
+                    <span>Distributed Systems</span>
                     <span className="competency-level">Advanced</span>
                   </div>
                   <div className="competency-bar">
                     <div
                       className="competency-fill"
-                      style={{ width: "80%" }}
+                      style={{ width: "90%" }}
                     ></div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Key Technologies - Simple non-animated badges */}
+            {/* Technologies - Balanced between ML Research and Backend */}
             <div className="key-technologies">
-              <h3>Key Technologies</h3>
+              <h3>Technologies & Frameworks</h3>
               <div className="tech-badges">
-                <span className="tech-badge js-badge">JavaScript</span>
-                <span className="tech-badge ts-badge">TypeScript</span>
-                <span className="tech-badge react-badge">React.js</span>
-                <span className="tech-badge next-badge">Next.js</span>
-                <span className="tech-badge node-badge">Node.js</span>
-                <span className="tech-badge mongo-badge">MongoDB</span>
+                {/* ML Research Technologies */}
+                <span className="tech-badge ml-tech">TensorFlow</span>
+                <span className="tech-badge ml-tech">PyTorch</span>
+                <span className="tech-badge ml-tech">Hugging Face</span>
+                
+                {/* Backend Technologies */}
+                <span className="tech-badge backend-tech">Java</span>
+                <span className="tech-badge backend-tech">Spring Boot</span>
+                <span className="tech-badge backend-tech">Kafka</span>
+                
+                {/* ML Research Technologies */}
+                <span className="tech-badge ml-tech">ONNX</span>
+                <span className="tech-badge ml-tech">JAX</span>
+                
+                {/* Backend Technologies */}
+                <span className="tech-badge backend-tech">PostgreSQL</span>
+                <span className="tech-badge backend-tech">Redis</span>
+                
+                {/* Shared/Integration Technologies */}
+                <span className="tech-badge data-tech">Docker</span>
+                <span className="tech-badge cloud-tech">Kubernetes</span>
+                <span className="tech-badge cloud-tech">MLflow</span>
               </div>
             </div>
           </div>

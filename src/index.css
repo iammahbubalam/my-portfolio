@@ -407,6 +407,18 @@ p {
   color: #FF6F00; /* TensorFlow orange */
 }
 
+.backend-icon {
+  color: #0077B6; /* Deep blue */
+}
+
+.data-icon {
+  color: #38b2ac; /* Teal green */
+}
+
+.integration-icon {
+  color: #8344AD; /* Purple - representing the integration of ML and Backend */
+}
+
 /* Main title styling */
 .hero-title {
   font-size: 3.5rem;
@@ -2046,4 +2058,50 @@ button,
     padding: 0.4rem 1rem;
     font-size: 0.75rem;
   }
+}
+
+/* Enhanced About Section */
+.ml-tech {
+  background-color: rgba(255, 111, 0, 0.2);
+  color: #FF8F3D;
+  border: 1px solid rgba(255, 111, 0, 0.3);
+}
+
+.backend-tech {
+  background-color: rgba(0, 119, 182, 0.2);
+  color: #0098E3;
+  border: 1px solid rgba(0, 119, 182, 0.3);
+}
+
+.data-tech {
+  background-color: rgba(56, 178, 172, 0.2);
+  color: #42d3cb;
+  border: 1px solid rgba(56, 178, 172, 0.3);
+}
+
+.cloud-tech {
+  background-color: rgba(0, 180, 216, 0.2);
+  color: #30CDE9;
+  border: 1px solid rgba(0, 180, 216, 0.3);
+}
+
+/* Update the badge layout in about section */
+.tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.tech-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }

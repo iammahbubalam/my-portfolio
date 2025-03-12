@@ -17,7 +17,7 @@ import {
   SiKubernetes,
   SiOpencv,
   SiGraphql,
-  SiNeo4J // Using Neo4j as an alternative vector/graph database
+  SiNeo4J 
 } from "react-icons/si";
 import { TbBrandMeta } from "react-icons/tb";
 import "../styles/floating-icons.css";
@@ -47,7 +47,7 @@ const Hero = () => {
 
   return (
     <section className="hero" id="home">
-      {/* Floating Tech Icons - updated with requested technologies */}
+      {/* Floating Tech Icons */}
       <div className="floating-icons">
         <div className="floating-icon icon1"><FaJava /></div>
         <div className="floating-icon icon2"><SiSpringboot /></div>
