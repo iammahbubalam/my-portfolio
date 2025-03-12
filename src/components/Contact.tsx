@@ -69,7 +69,7 @@ const Contact = () => {
                   <FaFacebook />
                 </a>
                 <a
-                  href="https://www.instagram.com/iamtonmoy"
+                  href="https://www.instagram.com/iammahbubalamnirjon"
                   target="_blank"
                   className="social-link"
                   aria-label="Instagram"
