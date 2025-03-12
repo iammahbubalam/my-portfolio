@@ -2239,3 +2239,30 @@ button,
   justify-content: center;
   gap: 1rem;
 }
+
+/* Add loading animation for skills section */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Optimized mobile card styles */
+@media screen and (max-width: 768px) {
+  /* ...existing code... */
+  
+  .skill-card {
+    transform: none !important; /* Prevent transform on mobile */
+    transition: transform 0.2s ease !important; /* Faster transitions */
+    will-change: auto !important; /* Remove hardware acceleration on mobile */
+    backdrop-filter: none !important; /* Remove expensive filters on mobile */
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  .skill-card:hover {
+    transform: translateY(-5px) !important; /* Simpler hover effect */
+  }
+  
+  .skill-icon, .skill-name {
+    transition: none !important; /* Disable transitions for performance */
+  }
+}
