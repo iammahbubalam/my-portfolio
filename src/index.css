@@ -728,10 +728,6 @@ p {
     font-size: 2.5rem;
   }
 
-  .hero-subtitle {
-    font-size: 1.1rem;
-  }
-
   .typing-wrapper {
     max-width: 90%;
   }
@@ -762,6 +758,21 @@ p {
   .outline-button {
     width: 100%;
     max-width: 250px;
+  }
+  
+  /* Increase padding for container on small screens */
+  .container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    max-width: 100%;
+  }
+}
+
+/* Add additional breakpoint for very small screens */
+@media screen and (max-width: 480px) {
+  .container {
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
   }
 }
 
