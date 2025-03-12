@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { FaBrain, FaServer, FaDatabase, FaCode, FaLayerGroup, FaNetworkWired } from "react-icons/fa";
+import {
+  FaBrain,
+  FaServer,
+  FaDatabase,
+  FaLayerGroup,
+  FaNetworkWired,
+} from "react-icons/fa";
 
 import me from "../assets/me.jpeg";
 const About = () => {
@@ -30,7 +36,7 @@ const About = () => {
         <h2 className="section-title">About Me</h2>
 
         <div className="about-grid">
-          {/* Left side - Image and highlights */}
+          {/* Left side - Image, highlights and research focus */}
           <div className="about-image-wrapper">
             <img src={me} alt="Md. Mahbub Alam" className="about-image" />
 
@@ -73,40 +79,71 @@ const About = () => {
                 </div>
               </div>
             </div>
+            
+            {/* Moved Research & Development Focus to left column */}
+            <div className="research-interests">
+              <h3>Current Research & Development Focus</h3>
+              <div className="interests-grid">
+                <div className="interest-item">
+                  <FaBrain className="interest-icon" />
+                  <h4>Multimodal LLMs</h4>
+                  <p>Integrating vision and language capabilities</p>
+                </div>
+                <div className="interest-item">
+                  <FaDatabase className="interest-icon" />
+                  <h4>RAG Systems</h4>
+                  <p>Efficient retrieval-augmented generation</p>
+                </div>
+                <div className="interest-item">
+                  <FaServer className="interest-icon" />
+                  <h4>Distributed System</h4>
+                  <p>High Performance and Scalable Distributed System</p>
+                </div>
+                <div className="interest-item">
+                  <FaLayerGroup className="interest-icon" />
+                  <h4>High-Performance APIs</h4>
+                  <p>Reactive microservices with Spring WebFlux</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Right side - Balanced content for ML Research & Backend */}
+          {/* Right side - About content & Core Competencies */}
           <div className="about-content">
             <h3 className="about-subtitle">
               Machine Learning Researcher & Backend Engineer
             </h3>
 
             <p className="about-text">
-              I work at the intersection of cutting-edge ML research and scalable backend engineering. 
-              On the research side, I specialize in transformer architectures, large language models, 
-              and generative AI for both text and images. As a backend engineer, I design robust 
-              distributed systems, microservices, and data pipelines that can handle enterprise-scale workloads.
+              I work at the intersection of cutting-edge ML research and
+              scalable backend engineering. On the research side, I specialize
+              in transformer architectures, large language models, and
+              generative AI for both text and images. As a backend engineer, I
+              design robust distributed systems, microservices, and data
+              pipelines that can handle enterprise-scale workloads.
             </p>
 
             <p className="about-text">
-              My dual expertise allows me to bridge the gap between theoretical advancements and 
-              production-ready implementations. I develop high-performance ML pipelines and APIs 
-              that make complex AI capabilities accessible through well-designed backends. 
-              This combination of skills enables me to build complete, end-to-end AI systems 
-              that are both innovative and production-ready.
-            </p>
-            
-            <p className="about-text">
-              I'm equally passionate about pushing boundaries in ML research—exploring techniques 
-              like parameter-efficient fine-tuning and multimodal learning—and creating elegant 
-              backend solutions using microservice architecture, message queues, and distributed 
-              computing frameworks that can reliably serve these advanced models at scale.
+              My dual expertise allows me to bridge the gap between theoretical
+              advancements and production-ready implementations. I develop
+              high-performance ML pipelines and APIs that make complex AI
+              capabilities accessible through well-designed backends. This
+              combination of skills enables me to build complete, end-to-end AI
+              systems that are both innovative and production-ready.
             </p>
 
-            {/* Skills overview - Balanced between ML Research and Backend */}
+            <p className="about-text">
+              I'm equally passionate about pushing boundaries in ML
+              research—exploring techniques like parameter-efficient fine-tuning
+              and multimodal learning—and creating elegant backend solutions
+              using microservice architecture, message queues, and distributed
+              computing frameworks that can reliably serve these advanced models
+              at scale.
+            </p>
+
+            {/* Core Competencies stays in right column */}
             <div className="skills-overview">
               <h3>Core Competencies</h3>
-
               <div className="competency-bars">
                 {/* ML Research Competencies */}
                 <div className="competency-item">
@@ -165,34 +202,36 @@ const About = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        
+        {/* Full-width Technologies & Frameworks section */}
+        <div className="full-width-section">
+          <div className="key-technologies">
+            <h3>Technologies & Frameworks</h3>
+            <div className="tech-badges">
+              {/* ML Research Technologies */}
+              <span className="tech-badge ml-tech">TensorFlow</span>
+              <span className="tech-badge ml-tech">PyTorch</span>
+              <span className="tech-badge ml-tech">Hugging Face</span>
 
-            {/* Technologies - Balanced between ML Research and Backend */}
-            <div className="key-technologies">
-              <h3>Technologies & Frameworks</h3>
-              <div className="tech-badges">
-                {/* ML Research Technologies */}
-                <span className="tech-badge ml-tech">TensorFlow</span>
-                <span className="tech-badge ml-tech">PyTorch</span>
-                <span className="tech-badge ml-tech">Hugging Face</span>
-                
-                {/* Backend Technologies */}
-                <span className="tech-badge backend-tech">Java</span>
-                <span className="tech-badge backend-tech">Spring Boot</span>
-                <span className="tech-badge backend-tech">Kafka</span>
-                
-                {/* ML Research Technologies */}
-                <span className="tech-badge ml-tech">ONNX</span>
-                <span className="tech-badge ml-tech">JAX</span>
-                
-                {/* Backend Technologies */}
-                <span className="tech-badge backend-tech">PostgreSQL</span>
-                <span className="tech-badge backend-tech">Redis</span>
-                
-                {/* Shared/Integration Technologies */}
-                <span className="tech-badge data-tech">Docker</span>
-                <span className="tech-badge cloud-tech">Kubernetes</span>
-                <span className="tech-badge cloud-tech">MLflow</span>
-              </div>
+              {/* Backend Technologies */}
+              <span className="tech-badge backend-tech">Java</span>
+              <span className="tech-badge backend-tech">Spring Boot</span>
+              <span className="tech-badge backend-tech">Kafka</span>
+
+              {/* ML Research Technologies */}
+              <span className="tech-badge ml-tech">ONNX</span>
+              <span className="tech-badge ml-tech">JAX</span>
+
+              {/* Backend Technologies */}
+              <span className="tech-badge backend-tech">PostgreSQL</span>
+              <span className="tech-badge backend-tech">Redis</span>
+
+              {/* Shared/Integration Technologies */}
+              <span className="tech-badge data-tech">Docker</span>
+              <span className="tech-badge cloud-tech">Kubernetes</span>
+              <span className="tech-badge cloud-tech">MLflow</span>
             </div>
           </div>
         </div>
