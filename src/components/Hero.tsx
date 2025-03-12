@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaArrowRight, FaCode, FaReact, FaJava, FaGithub, FaDatabase, FaDocker, FaGit } from "react-icons/fa";
+import { FaArrowRight, FaReact, FaJava, FaGithub, FaDatabase, FaDocker, FaGit } from "react-icons/fa";
 import { 
   SiJavascript, 
   SiSpringboot,
@@ -76,67 +76,76 @@ const Hero = () => {
       </div>
       
       <div className={`hero-content ${isLoaded ? "loaded" : ""}`}>
-        {/* Decorative background elements */}
+        {/* Enhanced background elements */}
         <div className="hero-bg-elements">
           <div className="hero-shape shape-1"></div>
           <div className="hero-shape shape-2"></div>
           <div className="hero-shape shape-3"></div>
+          <div className="hero-shape shape-4"></div> {/* New shape for improved visual effect */}
         </div>
 
-        {/* Tag line */}
-        <div className="hero-tag">
+        {/* Updated professional tag line */}
+        <div className="hero-tag professional-tag">
           <span className="hero-icon">
-            <FaCode />
+            <SiTensorflow className="ml-icon" />
           </span>
-          <span>Backend Engineere and Machine Learning Researcher</span>
+          <span>Machine Learning Researcher & Backend Engineer</span>
         </div>
 
         {/* Main title */}
         <h1 className="hero-title">
           Hi, I'm{" "}
-          <span className="highlight gradient-animated">Likhon Sarker</span>
+          <span className="highlight gradient-animated">Md. Mahbub Alam</span>
         </h1>
 
-        {/* Subtitle with typing effect */}
+        {/* Updated subtitle with more technical focus */}
         <p className="hero-subtitle">
-          I build{" "}
-          <span className="hero-emphasis">exceptional digital experiences</span>{" "}
-          with modern web technologies
+          Building{" "}
+          <span className="hero-emphasis">scalable systems</span>{" "}
+          and <span className="hero-emphasis">intelligent solutions</span> with cutting-edge technology
         </p>
 
-        {/* Centered typing animation container without static text */}
+        {/* Specialized typing animation for ML/Backend */}
         <div className="typing-wrapper">
-          <div className="typing-container">
+          <div className="typing-container tech-typing">
             <div className="typing-slider centered-slider">
-              <div className="typing-slide">Javascript & TypeScript Expert</div>
-              <div className="typing-slide">React & Next.js Developer</div>
-              <div className="typing-slide">MongoDB & PostgreSQL</div>
-              <div className="typing-slide">Node.js & Express.js</div>
+              <div className="typing-slide">TensorFlow & PyTorch Expert</div>
+              <div className="typing-slide">Microservices Architecture</div>
+              <div className="typing-slide">Natural Language Processing</div>
+              <div className="typing-slide">Spring Boot & Java</div>
             </div>
           </div>
         </div>
 
-        {/* Call to action buttons with improved click handling */}
+        {/* Updated call-to-action buttons */}
         <div
           className="hero-buttons"
           style={{ position: "relative", zIndex: 20 }}
         >
           <a
-            href="#contact"
-            onClick={(e) => scrollToSection("contact", e)}
+            href="#projects"
+            onClick={(e) => scrollToSection("projects", e)}
             className="primary-button"
             style={{ position: "relative", zIndex: 20 }}
           >
-            Contact Me <FaArrowRight className="button-icon" />
+            View Research<FaArrowRight className="button-icon" />
           </a>
           <a
-            href="#projects"
-            onClick={(e) => scrollToSection("projects", e)}
+            href="#contact"
+            onClick={(e) => scrollToSection("contact", e)}
             className="outline-button"
             style={{ position: "relative", zIndex: 20 }}
           >
-            View Projects
+            Contact Me
           </a>
+        </div>
+        
+        {/* Technical badges - new element to showcase key technologies */}
+        <div className="hero-tech-badges">
+          <div className="tech-badge ml-badge">Machine Learning</div>
+          <div className="tech-badge backend-badge">Backend Systems</div>
+          <div className="tech-badge cloud-badge">Cloud Architecture</div>
+          <div className="tech-badge data-badge">Data Engineering</div>
         </div>
       </div>
     </section>

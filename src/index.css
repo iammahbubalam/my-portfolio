@@ -266,6 +266,19 @@ p {
   overflow: hidden;
 }
 
+/* Hero section enhancements */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1rem;
+  padding-top: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
 .hero-content {
   max-width: 800px;
   position: relative;
@@ -297,6 +310,14 @@ p {
   filter: blur(40px);
 }
 
+/* Enhanced background elements */
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15; /* Slightly increased opacity for better visibility */
+  filter: blur(40px);
+}
+
 .shape-1 {
   width: 400px;
   height: 400px;
@@ -315,6 +336,15 @@ p {
   animation: floatAnimation 12s infinite alternate-reverse ease-in-out;
 }
 
+.shape-2 {
+  width: 300px;
+  height: 300px;
+  background: #8344AD; /* Machine learning purple shade */
+  bottom: -150px;
+  left: -120px;
+  animation: floatAnimation 12s infinite alternate-reverse ease-in-out;
+}
+
 .shape-3 {
   width: 200px;
   height: 200px;
@@ -322,6 +352,16 @@ p {
   bottom: 10%;
   right: 10%;
   animation: floatAnimation 20s infinite alternate ease-in-out;
+}
+
+/* New shape for more visual complexity */
+.shape-4 {
+  width: 250px;
+  height: 250px;
+  background: #00B4D8;
+  top: 40%;
+  left: -80px;
+  animation: floatAnimation 18s infinite alternate ease-in-out;
 }
 
 @keyframes floatAnimation {
@@ -348,9 +388,23 @@ p {
   opacity: 0;
 }
 
+/* Enhanced tag line */
+.professional-tag {
+  background-color: rgba(0, 119, 182, 0.15);
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 .hero-icon {
   color: var(--primary-color);
   font-size: 1rem;
+}
+
+.ml-icon {
+  color: #FF6F00; /* TensorFlow orange */
 }
 
 /* Main title styling */
@@ -443,6 +497,17 @@ p {
   position: relative;
 }
 
+.typing-container {
+  border: 1px solid rgba(0, 119, 182, 0.3);
+  background-color: rgba(5, 25, 45, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.typing-text {
+  position: relative;
+  animation: typingSlide 10s ease-in-out infinite;
+}
+
 .typing-text {
   position: relative;
   animation: typingSlide 10s ease-in-out infinite;
@@ -461,6 +526,14 @@ p {
 
 .typing-item:last-child {
   margin-bottom: 0;
+}
+
+.typing-icon {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  line-height: 0;
+  display: inline-flex;
+  align-items: center;
 }
 
 .typing-icon {
@@ -1812,25 +1885,44 @@ button,
   animation-delay: 12s;
 }
 
+/* Update typing animation for more technical content */
 @keyframes typingFade {
-  0%,
-  5% {
+  0%, 3% {
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
   }
-  10%,
-  23% {
+  7%, 18% {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
   }
-  28%,
-  100% {
+  22%, 100% {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
   }
+}
+
+/* Update typing slides for a longer rotation with more items */
+.typing-slide:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-slide:nth-child(2) {
+  animation-delay: 4s;
+}
+
+.typing-slide:nth-child(3) {
+  animation-delay: 8s;
+}
+
+.typing-slide:nth-child(4) {
+  animation-delay: 12s;
+}
+
+.typing-slide:nth-child(5) {
+  animation-delay: 16s;
 }
 
 /* Remove old typing animation styles that conflict */
@@ -1892,4 +1984,66 @@ button,
   animation: typingFade 16s linear infinite;
   white-space: nowrap;
   text-align: center;
+}
+
+/* Technical badges */
+.hero-tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-top: 2rem;
+  opacity: 0;
+  animation: fadeInUp 1s 1.2s forwards;
+}
+
+.hero-tech-badges .tech-badge {
+  padding: 0.45rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.hero-tech-badges .tech-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ml-badge {
+  background-color: rgba(255, 111, 0, 0.2);
+  color: #FF8F3D;
+  border: 1px solid rgba(255, 111, 0, 0.3);
+}
+
+.backend-badge {
+  background-color: rgba(0, 119, 182, 0.2);
+  color: #0098E3;
+  border: 1px solid rgba(0, 119, 182, 0.3);
+}
+
+.cloud-badge {
+  background-color: rgba(0, 180, 216, 0.2);
+  color: #30CDE9;
+  border: 1px solid rgba(0, 180, 216, 0.3);
+}
+
+.data-badge {
+  background-color: rgba(131, 68, 173, 0.2);
+  color: #A76CD9;
+  border: 1px solid rgba(131, 68, 173, 0.3);
+}
+
+/* Updated responsive styles for the hero tech badges */
+@media (max-width: 768px) {
+  .hero-tech-badges {
+    gap: 0.6rem;
+  }
+  
+  .hero-tech-badges .tech-badge {
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+  }
 }
